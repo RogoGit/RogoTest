@@ -11,7 +11,7 @@ public class ArctgFunction {
             double result = 0;
             int seriesMemberNum = 0;
             double currentElementValue = x;
-            double precision = 1E-16;
+            double precision = 1e-16;
 
             while (abs(currentElementValue) >= precision) {
                 currentElementValue = (pow(-1, seriesMemberNum) * pow(x,(2*seriesMemberNum+1))) / (2*seriesMemberNum+1);
