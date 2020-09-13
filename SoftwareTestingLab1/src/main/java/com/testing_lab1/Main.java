@@ -4,7 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Hello Lab1");
+        ///////////// task1 ///////////
+
+        System.out.println(String.format("%.14f", ArctgFunction.arctgToPowerSeries(0.2)));
+        System.out.println(String.format("%.14f", Math.atan(0.2)));
 
     }
 
