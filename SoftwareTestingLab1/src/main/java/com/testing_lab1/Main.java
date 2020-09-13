@@ -14,8 +14,8 @@ public class Main {
         DecimalFormat formatter = new DecimalFormat(doubleNumFormat);
         formatter.setRoundingMode(RoundingMode.CEILING);
 
-        System.out.println(formatter.format(ArctgFunction.arctgToPowerSeries(-0.4)));
-        System.out.println(formatter.format(Math.atan(-0.4)));
+        System.out.println(formatter.format(ArctgFunction.arctgToPowerSeries(1.0)));
+        System.out.println(formatter.format(Math.atan(1.0)));
 
     }
 
