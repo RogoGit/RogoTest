@@ -4,7 +4,7 @@ import static java.lang.Math.*;
 
 public class ArctgFunction {
 
-    public static final double precision = 1e-16;
+    private static final double precision = 1e-16;
 
     public static Double arctgToPowerSeries(Double x) {
 
@@ -12,7 +12,7 @@ public class ArctgFunction {
 
             double result = 0;
             int seriesMemberNum = 0;
-            int limit = 100000000;
+            int limit = 10000000;
             double currentElementValue = x;
 
             while (abs(currentElementValue) >= precision && (seriesMemberNum < limit)) {
