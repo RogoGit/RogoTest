@@ -30,7 +30,10 @@ public class Main {
         heap.insert(0);
         heap.insert(25);
 
-        heap.printHeap();
+        heap.clear();
+        heap.deleteMin();
+
+        System.out.println(heap.printHeap());
 
     }
 

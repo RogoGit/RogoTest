@@ -4,6 +4,7 @@ public class LeftistHeap {
 
     private LeftistHeapNode rootNode;
     private String inorderTraverse = "";
+    private String sValues = "";
 
     public LeftistHeap() {
         rootNode = null;
@@ -60,16 +61,32 @@ public class LeftistHeap {
         rootNode = null;
     }
 
-    public void printHeap() {
-        System.out.println(inorder(rootNode));
+    public String showSValues() {
+        return getSValues(rootNode);
+    }
+
+    private String getSValues(LeftistHeapNode rootNode) {
+
+        if (rootNode != null) {
+            getSValues(rootNode.leftChild);
+            getSValues(rootNode.rightChild);
+            sValues = sValues + rootNode.sValue.toString() + " ";
+        }
+
+        return sValues;
+
+    }
+
+    public String printHeap() {
+        return inorder(rootNode);
     }
 
     private String inorder(LeftistHeapNode rootNode) {
 
         if (rootNode != null) {
             inorder(rootNode.leftChild);
-            inorderTraverse = inorderTraverse + rootNode.element.toString() + " ";
             inorder(rootNode.rightChild);
+            inorderTraverse = inorderTraverse + rootNode.element.toString() + " ";
         }
 
         return inorderTraverse;
