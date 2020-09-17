@@ -17,6 +17,21 @@ public class Main {
         System.out.println(formatter.format(ArctgFunction.arctgToPowerSeries(0.9)));
         System.out.println(formatter.format(Math.atan(0.9)));
 
+        //////////// task2 ////////////
+
+        LeftistHeap heap = new LeftistHeap();
+
+        heap.insert(5);
+        heap.insert(10);
+        heap.insert(20);
+        heap.insert(15);
+        heap.insert(30);
+        heap.insert(40);
+        heap.insert(0);
+        heap.insert(25);
+
+        heap.printHeap();
+
     }
 
 }
