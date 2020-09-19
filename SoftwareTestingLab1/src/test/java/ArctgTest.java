@@ -1,5 +1,3 @@
-import com.testing_lab1.ArctgFunction;
-import com.testing_lab1.Main;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

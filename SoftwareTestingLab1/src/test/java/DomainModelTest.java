@@ -1,7 +1,7 @@
-import com.testing_lab1.model.Astronaut;
-import com.testing_lab1.model.AstronautTransfer;
-import com.testing_lab1.model.Location;
-import com.testing_lab1.model.TransferWay;
+import model.Astronaut;
+import model.AstronautTransfer;
+import model.Location;
+import model.TransferWay;
 import org.junit.Assert;
 import org.junit.Test;
 

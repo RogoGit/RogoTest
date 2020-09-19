@@ -1,5 +1,3 @@
-package com.testing_lab1;
-
 import static java.lang.Math.*;
 
 public class ArctgFunction {

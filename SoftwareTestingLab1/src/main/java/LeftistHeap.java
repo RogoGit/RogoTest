@@ -1,5 +1,3 @@
-package com.testing_lab1;
-
 public class LeftistHeap {
 
     private LeftistHeapNode rootNode;

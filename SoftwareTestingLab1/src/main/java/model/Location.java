@@ -1,4 +1,4 @@
-package com.testing_lab1.model;
+package model;
 
 public enum Location {
     SPACE_SHIP,
