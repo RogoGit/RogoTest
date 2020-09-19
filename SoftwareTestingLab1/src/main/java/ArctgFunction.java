@@ -4,7 +4,7 @@ public class ArctgFunction {
 
     private static final double precision = 1e-7;
 
-    public static Double arctgToPowerSeries(Double x) {
+    public static Double arctgToPowerSeries(double x) {
 
         if ( abs(x) <= 1) {
 

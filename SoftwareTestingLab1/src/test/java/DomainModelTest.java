@@ -1,60 +1,94 @@
-import model.Astronaut;
-import model.AstronautTransfer;
-import model.Location;
-import model.TransferWay;
-import org.junit.Assert;
-import org.junit.Test;
+import model.*;
+import org.junit.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class DomainModelTest {
 
-    private Astronaut astronaut;
+    private static Astronaut astronaut;
     private AstronautTransfer transfer;
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outData = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
-    @Test
-    public void testAstronautTransfer() {
+    @BeforeClass
+    public static void createAstro() {
+        astronaut = new Astronaut("Ford");
+    }
 
-        astronaut = new Astronaut("Ford", Location.OUTER_SPACE);
-        transfer = new AstronautTransfer(astronaut, Location.SPACE_SHIP);
-        transfer.organizeTransfer();
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outData));
+    }
 
-        Assert.assertEquals(astronaut.getName() + " вылетел куда-то не туда", transfer.getDestination(), astronaut.getLocation());
+    @After
+    public void resettingTestData() {
 
+        ShipEngine.getEngineInfo().isWorking = false;
+        if (astronaut == null) astronaut = new Astronaut("Ford");
+        astronaut.setLocation(Location.SPACE_SHIP);
+        System.setOut(originalOut);
     }
 
     @Test
-    public void testSpaceTransferWay() {
+    public void testAstronautStartingLocation() {
 
-        astronaut = new Astronaut("Ford", Location.SPACE_SHIP);
+        Assert.assertEquals("Космонавт еще не выходил в космос и должен сейчас быть на корабле", Location.SPACE_SHIP, astronaut.getLocation());
+    }
+
+    @Test
+    public void testTransferAstronautToSpace() {
+
         transfer = new AstronautTransfer(astronaut, Location.OUTER_SPACE);
         transfer.organizeTransfer();
 
-        Assert.assertEquals("Космноват должен был вылететь в космос, как конфетти", transfer.getTransferWay(), TransferWay.CONFETTI_LIKE_WAY);
+        Assert.assertEquals(astronaut.getName() + " вылетел куда-то не туда", astronaut.getLocation(),  transfer.getDestination());
+        Assert.assertEquals("Космноват должен был вылететь в космос, как конфетти", TransferWay.CONFETTI_LIKE_WAY,  transfer.getTransferWay());
 
     }
 
     @Test
     public void testTransferToSameLocation() {
 
-        System.setOut(new PrintStream(outContent));
-
-        astronaut = new Astronaut("Ford", Location.SPACE_SHIP);
         transfer = new AstronautTransfer(astronaut, Location.SPACE_SHIP);
         transfer.organizeTransfer();
 
-        Assert.assertEquals("Нельзя отправить космонавта туда, где он находится сейчас", outContent.toString(), "Перемещение космонавта не требуется");
+        Assert.assertEquals("Нельзя отправить космонавта туда, где он находится сейчас", "Перемещение космонавта не требуется", outData.toString());
 
     }
 
     @Test (expected = NullPointerException.class)
     public void testTransferNullParameter() {
+
         astronaut = null;
         transfer = new AstronautTransfer(astronaut, null);
         transfer.organizeTransfer();
+
+    }
+
+    @Test
+    public void testEngineStart() {
+
+        ShipEngine.getEngineInfo().startTheEngine();
+        Assert.assertTrue("Мотор не заработал", ShipEngine.getEngineInfo().isWorking);
+
+    }
+
+    @Test
+    public void testEngineStop() {
+
+        ShipEngine.getEngineInfo().stopTheEngine();
+        Assert.assertFalse("Мотор не перестал работать", ShipEngine.getEngineInfo().isWorking);
+
+    }
+
+    @Test
+    public void testRepetition() {
+
+        ShipEngine.getEngineInfo().stopTheEngine();
+        Assert.assertEquals("Нельзя повторно остановить двигатель", "Мотор и так не работает\n", outData.toString());
+
     }
 
 

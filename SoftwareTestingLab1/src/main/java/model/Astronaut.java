@@ -6,9 +6,9 @@ public class Astronaut {
     private Location location;
 
 
-    public Astronaut(String name, Location currentLocation) {
+    public Astronaut(String name) {
         this.name = name;
-        this.location = currentLocation;
+        this.location = Location.SPACE_SHIP;
     }
 
     public Location getLocation() {
