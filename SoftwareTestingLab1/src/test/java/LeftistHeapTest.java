@@ -50,7 +50,7 @@ public class LeftistHeapTest {
     }
 
     @Test
-    public void testHeapDeleteMinValue() {
+    public void testHeapDeleteMin() {
 
         LeftistHeap heap = new LeftistHeap();
 
@@ -63,32 +63,12 @@ public class LeftistHeapTest {
         heap.insert(0);
         heap.insert(25);
 
-        int deleted = heap.deleteMin();         // is deleted value correct
+        Integer deleted = heap.deleteMin();     // is deleted value correct
+        String actualStructure = "20 30 15 40 25 10 5 ";    // is tree elements order correct after delete
+        String expectedStructure = heap.printHeap();
 
-        Assert.assertEquals("Значение удаленного элемента неправильное", deleted, 0);
-
-    }
-
-    @Test
-    public void testHeapDeleteMinOrder() {
-
-        LeftistHeap heap = new LeftistHeap();
-
-        heap.insert(5);
-        heap.insert(10);
-        heap.insert(20);
-        heap.insert(15);
-        heap.insert(30);
-        heap.insert(40);
-        heap.insert(0);
-        heap.insert(25);
-
-        heap.deleteMin();
-
-        String expectedValue = heap.printHeap();
-        String actualValue = "20 30 15 40 25 10 5 ";    // is tree elements order correct after delete
-
-        Assert.assertEquals("Нерпавильная структура дерева при удалении мимнимального элемента", expectedValue, actualValue);
+        Assert.assertEquals("Неправильная структура дерева при удалении мимнимального элемента", expectedStructure, actualStructure);
+        Assert.assertEquals("Значение удаленного элемента неправильное", deleted, (Integer) 0);
 
     }
 
@@ -99,13 +79,13 @@ public class LeftistHeapTest {
 
         LeftistHeap heap = new LeftistHeap();
 
-        heap.deleteMin();
+        Integer deleted = heap.deleteMin();
 
         String expectedValue = heap.printHeap();
         String actualValue = "";
 
         Assert.assertEquals("Ошибка при удалении минимального элемента в пустой куче", expectedValue, actualValue);
-
+        Assert.assertNull("Минимальное ", deleted);
     }
 
     @Test

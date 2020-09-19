@@ -45,10 +45,10 @@ public class LeftistHeap {
         rootNode = merge(new LeftistHeapNode(x), rootNode);
     }
 
-    public int deleteMin() {
+    public Integer deleteMin() {
 
         if (rootNode == null)
-            return -1;
+            return null;
         int minItem = rootNode.element;
         rootNode = merge(rootNode.leftChild, rootNode.rightChild);
         return minItem;
