@@ -26,7 +26,6 @@ public class DomainModelTest {
     public void resettingTestData() {
 
         ShipEngine.getEngineInfo().isWorking = false;
-        if (astronaut == null) astronaut = new Astronaut("Ford");
         astronaut.setLocation(Location.SPACE_SHIP);
         System.setOut(originalOut);
     }
@@ -59,10 +58,9 @@ public class DomainModelTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void testTransferNullParameter() {
+    public void testTransferNullParameters() {
 
-        astronaut = null;
-        transfer = new AstronautTransfer(astronaut, null);
+        transfer = new AstronautTransfer(null, null);
         transfer.organizeTransfer();
 
     }
