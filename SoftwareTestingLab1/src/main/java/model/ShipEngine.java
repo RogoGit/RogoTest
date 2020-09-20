@@ -16,30 +16,30 @@ public class ShipEngine {
         return engine;
     }
 
-    public void startTheEngine() {
+    public String startTheEngine() {
 
         if (!isWorking) {
 
             isWorking = true;
-            System.out.println("Мотор зажжужал");
+            return "Мотор зажжужал";
 
         } else {
 
-            System.out.println("Мотор уже запущен");
+            return "Мотор уже запущен";
 
         }
     }
 
-    public void stopTheEngine() {
+    public String stopTheEngine() {
 
         if (!isWorking) {
 
-            System.out.println("Мотор и так не работает");
+            return "Мотор и так не работает";
 
         } else {
 
             isWorking = false;
-            System.out.println("Мотор остановлен");
+            return "Мотор остановлен";
 
         }
     }

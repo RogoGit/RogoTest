@@ -15,83 +15,92 @@ public class AirFlow {
         return intensity;
     }
 
-    public void moveToWhistle() {
+    public boolean isInTheVoid() {
+        return isInTheVoid;
+    }
+
+    public String moveToWhistle() {
 
         if (this.intensity.equals(AirFlowIntensity.NO_FLOW)) {
 
             if (ShipEngine.getEngineInfo().isWorking) {
                 this.intensity = AirFlowIntensity.GENTLE_WHISTLE;
                 this.isInTheVoid = false;
-                System.out.println("Зазвучал тоненький свист");
+                return "Зазвучал тоненький свист";
             }
 
-            if (!ShipEngine.getEngineInfo().isWorking) System.out.println("Мотор не работает. Все еще тишина...");
+            if (!ShipEngine.getEngineInfo().isWorking) return "Мотор не работает. Все еще тишина...";
 
         }
 
         if (this.intensity.equals(AirFlowIntensity.GENTLE_WHISTLE)) {
-            System.out.println("Свист не может перейти в свист");
+            return "Свист не может перейти в свист";
         }
 
         if (this.intensity.equals(AirFlowIntensity.AIR_ROAR)) {
 
-            if (ShipEngine.getEngineInfo().isWorking) System.out.println("Двигатель работает по полной! Рев не может стать свистом");
+            if (ShipEngine.getEngineInfo().isWorking) return "Двигатель работает по полной! Рев не может стать свистом";
 
             if (!ShipEngine.getEngineInfo().isWorking) {
-                System.out.println("Мотор не работает, и рев стихает, становясь свистом");
                 this.intensity = AirFlowIntensity.GENTLE_WHISTLE;
                 this.isInTheVoid = false;
+                return "Мотор не работает, и рев стихает, становясь свистом";
             }
 
         }
+
+        return null;
 
     }
 
-    public void moveToRoar() {
+    public String moveToRoar() {
 
         if (this.intensity.equals(AirFlowIntensity.NO_FLOW)) {
-            System.out.println("Невозможно стать ревом, не пройдя стадию свиста");
+            return "Невозможно стать ревом, не пройдя стадию свиста";
         }
 
         if (this.intensity.equals(AirFlowIntensity.AIR_ROAR)) {
-            System.out.println("Рев не может перейти в рев");
+            return "Рев не может перейти в рев";
         }
 
         if (this.intensity.equals(AirFlowIntensity.GENTLE_WHISTLE)) {
 
             if (ShipEngine.getEngineInfo().isWorking) {
-                System.out.println("Тоненький свист перерос в рев воздуха, вырывающегося в пустоту");
                 this.intensity = AirFlowIntensity.AIR_ROAR;
                 this.isInTheVoid = true;
+                return "Тоненький свист перерос в рев воздуха, вырывающегося в пустоту";
             }
-            if (!ShipEngine.getEngineInfo().isWorking) System.out.println("Мотор не работает, и рев стихает, становясь свистом");
+            if (!ShipEngine.getEngineInfo().isWorking) return "Свист не может стать ревом, мотор перестал работать";
 
         }
+
+        return null;
 
     }
 
-    public void moveToNoFlow() {
+    public String moveToNoFlow() {
 
         if (this.intensity.equals(AirFlowIntensity.NO_FLOW)) {
-            System.out.println("Все и так тихо, ни свиста, ни рева");
+            return "Все и так тихо, ни свиста, ни рева";
         }
 
         if (this.intensity.equals(AirFlowIntensity.AIR_ROAR)) {
-            System.out.println("Рев не может стихнуть так сразу, ему нужно стать свистом");
+            return "Рев не может стихнуть так сразу, ему нужно стать свистом";
         }
 
         if (this.intensity.equals(AirFlowIntensity.GENTLE_WHISTLE)) {
 
-            if (ShipEngine.getEngineInfo().isWorking) System.out.println("Тоненький свист не может прекратиться, пока мотор работает");
+            if (ShipEngine.getEngineInfo().isWorking) return "Тоненький свист не может прекратиться, пока мотор работает";
 
             if (!ShipEngine.getEngineInfo().isWorking) {
-                System.out.println("Мотор не работает, свист прекращается");
                 this.intensity = AirFlowIntensity.NO_FLOW;
                 this.isInTheVoid = false;
+                return "Мотор не работает, свист прекращается";
             }
 
         }
 
+        return null;
     }
 
 

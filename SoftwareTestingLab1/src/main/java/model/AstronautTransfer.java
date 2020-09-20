@@ -21,11 +21,11 @@ public class AstronautTransfer {
         return transferWay;
     }
 
-    public void organizeTransfer() {
+    public String organizeTransfer() {
 
         if (this.destination.equals(this.astronaut.getLocation())) {
 
-            System.out.print("Перемещение космонавта не требуется");
+            return "Перемещение космонавта не требуется";
 
         } else {
 
@@ -34,6 +34,7 @@ public class AstronautTransfer {
             }
 
             this.astronaut.setLocation(this.destination);
+            return "Перемещение успешно";
 
         }
 
