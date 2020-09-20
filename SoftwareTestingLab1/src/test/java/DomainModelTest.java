@@ -6,6 +6,7 @@ public class DomainModelTest {
     private Astronaut astronaut;
     private AstronautTransfer transfer;
     private AirFlow airFlow;
+    private DarkVoid darkVoid;
 
 
     @After
@@ -206,6 +207,78 @@ public class DomainModelTest {
         Assert.assertEquals("Свист не может прекратиться, двигатель работает!","Тоненький свист не может прекратиться, пока мотор работает", actualToNoFlow);
         Assert.assertEquals("Интенсивность потока не должна была измениться", AirFlowIntensity.GENTLE_WHISTLE, airFlow.getIntensity());
         Assert.assertFalse("Свист не может вырваться в пустоту", airFlow.isInTheVoid());
+
+    }
+
+    @Test
+    public void testAirFlowPresenceInVoid() {
+
+        airFlow = new AirFlow();
+        darkVoid = new DarkVoid();
+
+        ShipEngine.getEngineInfo().startTheEngine();
+        Assert.assertFalse("В пустоту не может вырваться поток NO_FLOW", darkVoid.canFeelAirFlow(airFlow));
+        airFlow.moveToWhistle();
+        Assert.assertFalse("В пустоту не может вырваться свист", darkVoid.canFeelAirFlow(airFlow));
+        airFlow.moveToRoar();
+        Assert.assertTrue("Рев воздуха должен вырываться в пустоту", darkVoid.canFeelAirFlow(airFlow));
+
+    }
+
+    @Test
+    public void testFillingVoidWithDots() {
+
+        darkVoid = new DarkVoid();
+        String actualFillWithNegative = darkVoid.fillVoidWithDots(-100);
+        Assert.assertEquals("Не проверяются отрицательные числа","Необходимая яркость должна быть между 0 и 1000", actualFillWithNegative);
+        String actualFillWithBig = darkVoid.fillVoidWithDots(10000);
+        Assert.assertEquals("Не проверяются числа больше допустимых","Необходимая яркость должна быть между 0 и 1000", actualFillWithBig);
+
+        darkVoid.fillVoidWithDots(500);
+        Assert.assertEquals("Пустота недостаточно усеяна точками", DarkVoid.minDotNumberToBeSplashed, darkVoid.getIncrediblyBrightDots().size());
+
+    }
+
+    @Test
+    public void testClearTheVoid() {
+
+        darkVoid = new DarkVoid();
+        darkVoid.clearTheVoid();
+        Assert.assertEquals("Неправильное количество звезд после очистки пустой пустоты", 0, darkVoid.getIncrediblyBrightDots().size());
+        darkVoid.fillVoidWithDots(200);
+        darkVoid.clearTheVoid();
+        Assert.assertEquals("Неправильное количество звезд после очистки непустой пустоты", 0, darkVoid.getIncrediblyBrightDots().size());
+
+    }
+
+    @Test
+    public void testGettingDotsNumber() {
+
+        darkVoid = new DarkVoid();
+        Assert.assertEquals("Неправильно получено количество точек пустой пустоты", 0, darkVoid.getDotsNum());
+        darkVoid.fillVoidWithDots(300);
+        Assert.assertEquals("Неправильно получен количество точек заполненной пустоты", DarkVoid.minDotNumberToBeSplashed, darkVoid.getDotsNum());
+        darkVoid.clearTheVoid();
+        Assert.assertEquals("Неправильно получено количество точек очищенной пустоты", 0, darkVoid.getDotsNum());
+
+    }
+
+    @Test
+    public void testDotsNumBorderValue() {
+
+        darkVoid = new DarkVoid();
+        darkVoid.fillVoidWithDots(0);
+        Assert.assertEquals("Пустота недостаточно усеяна точками", DarkVoid.minDotNumberToBeSplashed, darkVoid.getDotsNum());
+
+    }
+
+    @Test
+    public void testNotEmptyVoid() {
+
+        darkVoid = new DarkVoid();
+        darkVoid.fillVoidWithDots(300);
+        String actualValue = darkVoid.fillVoidWithDots(400);
+        Assert.assertEquals("Пустота уже заполнена точками", "Эта пустота уже усеяна яркими точками", actualValue);
 
     }
 

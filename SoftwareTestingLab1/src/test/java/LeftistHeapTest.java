@@ -68,7 +68,7 @@ public class LeftistHeapTest {
         String actualStructure = heap.printHeap();
 
         Assert.assertEquals("Неправильная структура дерева при удалении мимнимального элемента", expectedStructure, actualStructure);
-        Assert.assertEquals("Значение удаленного элемента неправильное", deleted, (Integer) 0);
+        Assert.assertEquals("Значение удаленного элемента неправильное", (Integer) 0, deleted);
 
     }
 
