@@ -1,0 +1,6 @@
+x,precision,expected,msg
+0,1e-8,-Infinity,In zero ln(x) must go to -inf
+0.5,1e-8,-0.693147,Failed testing value less than 1
+1,1e-8,0,In ln(1) result must be 0
+3,1e-8,1.098612,Failed testing positive value
++Infinity,1e-8,+Infinity,Failed testing infinity  

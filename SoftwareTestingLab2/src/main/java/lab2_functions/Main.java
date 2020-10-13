@@ -21,6 +21,8 @@ public class Main {
         System.out.println(EquationSystem.computeFunction(0.0));
         System.out.println(EquationSystem.computeFunction(1.5)); */
 
+     System.out.println(BasicFunctions.ln(0.0,0.00001));
+
     }
 
 }

@@ -30,9 +30,9 @@ public class BasicFunctions {
 
     public static Double ln(Double x, Double precision) {
 
-        if (x.isNaN() || x < 0 || x <= precision || precision.isInfinite() || precision.isNaN()) return Double.NaN;
-
         if (x == 0) return Double.NEGATIVE_INFINITY;
+
+        if (x.isNaN() || x < 0 || x <= precision || precision.isInfinite() || precision.isNaN()) return Double.NaN;
 
         if (x == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;
 
