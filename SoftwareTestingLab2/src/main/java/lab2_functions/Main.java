@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(Math.sin(1.9));
+     /*   System.out.println(Math.sin(1.9));
         System.out.println(BasicFunctions.sin(1.9));
 
         System.out.println(Math.log(-1));
@@ -19,7 +19,7 @@ public class Main {
 
         System.out.println(EquationSystem.computeFunction(-0.5));
         System.out.println(EquationSystem.computeFunction(0.0));
-        System.out.println(EquationSystem.computeFunction(1.5));
+        System.out.println(EquationSystem.computeFunction(1.5)); */
 
     }
 

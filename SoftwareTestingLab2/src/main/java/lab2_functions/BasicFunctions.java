@@ -4,14 +4,13 @@ import static java.lang.Math.abs;
 
 public class BasicFunctions {
 
-    private static final double precision = 1e-8;
-
-
     // trigonometry
 
-    public static Double sin(Double x) {
+    public static Double sin(Double x, Double precision) {
 
-        if (x.isInfinite() || x.isNaN()) return Double.NaN;
+        if (x.isInfinite() || x.isNaN() || precision.isNaN() || precision.isInfinite()) return Double.NaN;
+
+        if (x < precision) return 0.0;
 
         double result = 0;
         int seriesMemberNum = 1;
@@ -29,9 +28,9 @@ public class BasicFunctions {
 
     // logarithm
 
-    public static Double ln(Double x) {
+    public static Double ln(Double x, Double precision) {
 
-        if (x.isNaN() || x < 0) return Double.NaN;
+        if (x.isNaN() || x < 0 || x <= precision || precision.isInfinite() || precision.isNaN()) return Double.NaN;
 
         if (x == 0) return Double.NEGATIVE_INFINITY;
 
