@@ -6,7 +6,7 @@ import static lab2_functions.BasicFunctions.*;
 
 public class EquationSystem {
 
-    public static Double trigFunction(Double x, Double precision) {
+   /* public static Double trigFunction(Double x, Double precision) {
         return (((((pow(tan(x, precision),2)) + (tan(x,precision) + cos(x,precision)))
                 - cot(x,precision)) * tan(x, precision)) * (sec(x, precision) + sin(x, precision)));
     }
@@ -20,6 +20,6 @@ public class EquationSystem {
     public static Double computeFunction(Double x, Double precision) {
         if (x <= 0) return trigFunction(x, precision);
         return logFunction(x, precision);
-    }
+    }*/
 
 }

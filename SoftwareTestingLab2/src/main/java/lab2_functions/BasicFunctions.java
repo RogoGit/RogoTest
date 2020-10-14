@@ -28,11 +28,13 @@ public class BasicFunctions {
 
     // logarithm
 
-    public static Double ln(Double x, Double precision) {
+    public Double ln(Double x, Double precision) {
 
-        if (x == 0) return Double.NEGATIVE_INFINITY;
+        if (x == 0) return Double.NaN;
 
-        if (x.isNaN() || x < 0 || x <= precision || precision.isInfinite() || precision.isNaN()) return Double.NaN;
+        if (x.isNaN() || x < 0 || precision.isInfinite() || precision.isNaN()) return Double.NaN;
+
+        if (x <= precision) return Double.NEGATIVE_INFINITY;
 
         if (x == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;
 

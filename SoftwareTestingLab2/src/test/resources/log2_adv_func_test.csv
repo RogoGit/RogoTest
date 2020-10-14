@@ -1,0 +1,3 @@
+x,precision,expected,lnX,msg
+16,1e-6,4,2.7725887,failed testing log_2 positive value (x=16)
+

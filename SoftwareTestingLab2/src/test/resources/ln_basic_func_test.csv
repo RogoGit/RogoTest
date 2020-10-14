@@ -1,6 +1,15 @@
 x,precision,expected,msg
-0,1e-8,-Infinity,In zero ln(x) must go to -inf
-0.5,1e-8,-0.693147,Failed testing value less than 1
-1,1e-8,0,In ln(1) result must be 0
-3,1e-8,1.098612,Failed testing positive value
-+Infinity,1e-8,+Infinity,Failed testing infinity  
+0,1e-6,NaN,in zero ln(x) must be NaN
+0.0001,1e-6,-9.210340,failed testing near zero positive
+0.5,1e-6,-0.693147,failed testing value less than 1
+1,1e-6,0,in ln(1) result must be 0
+3,1e-6,1.098612,failed testing positive value
++Infinity,1e-6,+Infinity,failed testing +infinity
+1e-8,1e-6,-Infinity,positive value less then precision goes to -infinity
+-0.0001,1e-6,NaN,failed testing near zero negative
+-1,1e-6,NaN,failed testing negative number - must be NaN
+-Infinity,1e-6,NaN,in -infinity ln(x) must be NaN
+NaN,1e-6,NaN,ln(NaN) must be NaN
+3,NaN,NaN,precision is NaN - ln(x) must be NaN
+3,+Infinity,NaN,precision is +infinite - ln(x) must be NaN
+3,-Infinity,NaN,precision is -infinite - ln(x) must be NaN

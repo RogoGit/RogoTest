@@ -4,6 +4,12 @@ import static lab2_functions.BasicFunctions.*;
 
 public class AdvancedFunctions {
 
+    private BasicFunctions basicLnFunc;
+
+    public AdvancedFunctions(BasicFunctions basicLnFunc) {
+        this.basicLnFunc = basicLnFunc;
+    }
+
     // trigonometry
 
     public static Double cos(Double x, Double precision) {
@@ -26,16 +32,16 @@ public class AdvancedFunctions {
 
     // logarithm
 
-    public static Double log_2(Double x, Double precision) {
-        return ln(x, precision) / ln(2.0, precision);
+    public Double log_2(Double x, Double precision) {
+        return basicLnFunc.ln(x, precision) / basicLnFunc.ln(2.0, precision);
     }
 
-    public static Double log_3(Double x, Double precision) {
-        return ln(x, precision) / ln(3.0, precision);
+    public Double log_3(Double x, Double precision) {
+        return basicLnFunc.ln(x, precision) / basicLnFunc.ln(3.0, precision);
     }
 
-    public static Double log_5(Double x, Double precision) {
-        return ln(x, precision) / ln(5.0, precision);
+    public Double log_5(Double x, Double precision) {
+        return basicLnFunc.ln(x, precision) / basicLnFunc.ln(5.0, precision);
     }
 
 }
