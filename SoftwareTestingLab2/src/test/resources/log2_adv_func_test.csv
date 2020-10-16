@@ -10,7 +10,7 @@ x,precision,expected,lnX,msg
 -1,1e-6,NaN,NaN,failed testing negative number - must be NaN
 -Infinity,1e-6,NaN,NaN,in -infinity log2(x) must be NaN
 NaN,1e-6,NaN,NaN,log2(NaN) must be NaN
-3,NaN,NaN,NaN,precision is NaN - log2(x) must be NaN
-3,+Infinity,NaN,NaN,precision is +infinite - log2(x) must be NaN
-3,-Infinity,NaN,NaN,precision is -infinite - log2(x) must be NaN
+6,NaN,NaN,NaN,precision is NaN - log2(x) must be NaN
+6,+Infinity,NaN,NaN,precision is +infinite - log2(x) must be NaN
+6,-Infinity,NaN,NaN,precision is -infinite - log2(x) must be NaN
 

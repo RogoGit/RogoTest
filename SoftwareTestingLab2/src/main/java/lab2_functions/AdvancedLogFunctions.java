@@ -19,11 +19,11 @@ public class AdvancedLogFunctions {
     }
 
     public Double log_3(Double x, Double precision) {
-        return basicLnFunc.ln(x, precision) / basicLnFunc.ln(3.0, precision);
+        return basicLnFunc.ln(x, precision / 100) / basicLnFunc.ln(3.0, precision / 100);
     }
 
     public Double log_5(Double x, Double precision) {
-        return basicLnFunc.ln(x, precision) / basicLnFunc.ln(5.0, precision);
+        return basicLnFunc.ln(x, precision / 100) / basicLnFunc.ln(5.0, precision / 100);
     }
 
 }

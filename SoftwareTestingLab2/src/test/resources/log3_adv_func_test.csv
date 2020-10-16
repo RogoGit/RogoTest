@@ -1,0 +1,15 @@
+x,precision,expected,lnX,msg
+27,1e-6,3,3.2958368,failed testing log_3 positive value (x=27)
+0,1e-6,NaN,NaN,in zero log3(x) must be NaN
+0.0001,1e-6,-8.383613,-9.210340,failed testing near zero positive
+0.5,1e-6,-0.63093,-0.693147,failed testing value less than 1
+1,1e-6,0,0,in log3(1) result must be 0
++Infinity,1e-6,+Infinity,+Infinity,failed testing +infinity
+1e-8,1e-6,-Infinity,-Infinity,positive value less then precision goes to -infinity
+-0.0001,1e-6,NaN,NaN,failed testing near zero negative
+-1,1e-6,NaN,NaN,failed testing negative number - must be NaN
+-Infinity,1e-6,NaN,NaN,in -infinity log3(x) must be NaN
+NaN,1e-6,NaN,NaN,log3(NaN) must be NaN
+6,NaN,NaN,NaN,precision is NaN - log3(x) must be NaN
+6,+Infinity,NaN,NaN,precision is +infinite - log3(x) must be NaN
+6,-Infinity,NaN,NaN,precision is -infinite - log3(x) must be NaN
