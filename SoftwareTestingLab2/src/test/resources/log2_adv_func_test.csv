@@ -1,3 +1,16 @@
 x,precision,expected,lnX,msg
 16,1e-6,4,2.7725887,failed testing log_2 positive value (x=16)
+0,1e-6,NaN,NaN,in zero log2(x) must be NaN
+0.0001,1e-6,-13.287711842,-9.210340,failed testing near zero positive
+0.5,1e-6,-1,-0.693147,failed testing value less than 1
+1,1e-6,0,0,in log2(1) result must be 0
++Infinity,1e-6,+Infinity,+Infinity,failed testing +infinity
+1e-8,1e-6,-Infinity,-Infinity,positive value less then precision goes to -infinity
+-0.0001,1e-6,NaN,NaN,failed testing near zero negative
+-1,1e-6,NaN,NaN,failed testing negative number - must be NaN
+-Infinity,1e-6,NaN,NaN,in -infinity log2(x) must be NaN
+NaN,1e-6,NaN,NaN,log2(NaN) must be NaN
+3,NaN,NaN,NaN,precision is NaN - log2(x) must be NaN
+3,+Infinity,NaN,NaN,precision is +infinite - log2(x) must be NaN
+3,-Infinity,NaN,NaN,precision is -infinite - log2(x) must be NaN
 

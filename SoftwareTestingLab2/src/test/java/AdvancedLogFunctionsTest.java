@@ -31,4 +31,21 @@ class AdvancedLogFunctionsTest {
 
     }
 
+    @Nested
+    class AdvancedLogFunctionsIntegrationTest {
+
+        @ParameterizedTest
+        @CsvFileSource(resources = "/log2_adv_func_test.csv", numLinesToSkip = 1)
+        void testLog2AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
+
+            BasicFuncLn basicLn = new BasicFuncLn();
+            AdvancedLogFunctions log2Test = new AdvancedLogFunctions(basicLn);
+
+            Double actual = log2Test.log_2(x, precision);
+
+            Assert.assertEquals("Description: " + msg, expected, actual, precision);
+        }
+
+    }
+
 }
