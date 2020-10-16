@@ -1,5 +1,5 @@
-import lab2_functions.AdvancedFunctions;
-import lab2_functions.BasicFunctions;
+import lab2_functions.AdvancedLogFunctions;
+import lab2_functions.BasicFuncLn;
 import org.junit.Assert;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,12 +17,12 @@ class AdvancedLogFunctionsTest {
         @CsvFileSource(resources = "/log2_adv_func_test.csv", numLinesToSkip = 1)
         void testLog2AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
-            BasicFunctions mockLn = Mockito.mock(BasicFunctions.class);
+            BasicFuncLn mockLn = Mockito.mock(BasicFuncLn.class);
 
             Mockito.when(mockLn.ln(Mockito.eq(x), Mockito.anyDouble())).thenReturn(lnX);
             Mockito.when(mockLn.ln(Mockito.eq(2.0), Mockito.anyDouble())).thenReturn(ln2_actual_value);
 
-            AdvancedFunctions log2Test = new AdvancedFunctions(mockLn);
+            AdvancedLogFunctions log2Test = new AdvancedLogFunctions(mockLn);
 
             Double actual = log2Test.log_2(x, precision);
 

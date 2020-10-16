@@ -5,16 +5,16 @@ public class Main {
     public static void main(String[] args) {
 
      /*   System.out.println(Math.sin(1.9));
-        System.out.println(BasicFunctions.sin(1.9));
+        System.out.println(BasicFuncLn.sin(1.9));
 
         System.out.println(Math.log(-1));
-        System.out.println(BasicFunctions.ln(-1.0));
+        System.out.println(BasicFuncLn.ln(-1.0));
 
         System.out.println(Math.cos(0.4));
-        System.out.println(AdvancedFunctions.cos(0.4));
+        System.out.println(AdvancedLogFunctions.cos(0.4));
 
         System.out.println(Math.tan(0.4));
-        System.out.println(AdvancedFunctions.tan(0.4));
+        System.out.println(AdvancedLogFunctions.tan(0.4));
 
 
         System.out.println(EquationSystem.computeFunction(-0.5));
