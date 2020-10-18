@@ -17,3 +17,18 @@ x,precision,expected,sin,cos,tan,cot,sec,ln,log2,log3,log5,msg
 -0.480676,1e-5,-0.886508,-0.46237868,0.88668256,-0.52147037,-1.9176545,1.1277993,NaN,NaN,NaN,NaN,failed testing in third local maxima in [-8;0]
 -0.244952,1e-5,-0.942478,-0.2425098,0.970149,-0.24997167,-4.0004533,1.0307695,NaN,NaN,NaN,NaN,failed testing in third inflection point in [-8;0]
 0,1e-5,NaN,0,1,0,NaN,1,NaN,NaN,NaN,NaN,failed testing in x=0
+0.3,1e-5,6.6573334,0.295520,0.9553365,0.309336,3.23273,1.046752,-1.2039728,-1.736965594,-1.0959032743,-0.74807036,failed testing in pre first minima in (0;inf)
+0.5,1e-5,-0.153844955037,0.479426,0.8775826,0.546302,1.83049,1.139494,-0.69314718056,-1,-0.630929754,-0.4306765581,failed testing near first interception with zero in (0;inf)
+0.59372,1e-5,-0.37454,0.559448,0.828865,0.674957,1.48158,1.20647,-0.5213474512,-0.75214538,-0.4745509,-0.3239314,failed testing in first minima in (0;inf)
+0.719324,1e-5,-0.239388,0.658876,0.752251,0.875873,1.14172,1.32934,-0.3294434,-0.475286355,-0.2998723028,-0.20469469,failed testing in first inflection point in (0;inf)
+1,1e-5,0,0.841471,0.540302306,1.55740772,0.64209262,1.85081571,0,0,0,0,failed testing in second interception with zero (x=1)
+1.3095,1e-5,-0.173574,0.966056,0.258333,3.73957,0.267410,3.87097,0.26964538,0.38901606,0.2454418,0.167540097622,failed testing in second inflection point in (0;inf)
+1.6843,1e-5,-0.37454,0.993565,-0.113260,-8.77242,-0.113994,-8.82923,0.521350047,0.7521491277,0.4745532638,0.323933,failed testing in second minima in (0;inf)
+2.1,1e-5,0.0191301,0.863209,-0.504846,-1.70985,-0.584848,-1.98080,0.7419373447,1.07038933,0.675340475,0.46099159,failed testing near third interception with zero in (0;inf)
+3,1e-5,4.05873449,0.14112,-0.9899992,-0.142546,-7.01525255,-1.0101086,1.098612289,1.5849625,1,0.6826062,failed testing post third interceptiob with zero in (0;inf)
+NaN,1e-5,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with x=NaN - must be NaN
++Infinity,1e-5,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with infinite x - must be NaN
+-Infinity,1e-5,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with infinite x - must be NaN
+20,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with precision=NaN - must be NaN
+20,+Infinity,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with infinite precision - must be NaN
+20,-Infinity,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,failed testing with infinite precision - must be NaN
