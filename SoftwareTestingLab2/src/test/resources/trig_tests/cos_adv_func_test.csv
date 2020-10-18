@@ -1,0 +1,20 @@
+x,precision,expected,sinX,msg
+-4.71238898,1e-6,0,1,failed testing cos in (-3*pi/2)
+-3.66519143,1e-6,-0.8660254,0.5,failed testing cos in (-7*pi/6)
+-3.14159265,1e-6,-1,0,failed testing cos in -pi
+-2.61799388,1e-6,-0.8660254,-0.5,failed testing cos in (-5*pi/6)
+-1.57079637,1e-6,0,-1,failed testing cos in (-pi/2)
+-0.52359878,1e-6,0.8660254,-0.5,failed testing cos in (-pi/6)
+0,1e-6,1,0,failed testing cos in 0
+0.52359878,1e-6,0.8660254,0.5,failed testing cos in (pi/6)
+1.57079637,1e-6,0,1,failed testing cos in (pi/2)
+2.61799388,1e-6,-0.8660254,0.5,failed testing cos in (5*pi/6)
+3.14159265,1e-6,-1,0,failed testing cos in pi
+3.66519143,1e-6,-0.8660254,-0.5,failed testing cos in (7*pi/6)
+4.71238898,1e-6,0,-1,failed testing cos in (3*pi/2)
++Infinity,1e-6,NaN,NaN,in infinite x cos(x) must be NaN
+-Infinity,1e-6,NaN,NaN,in infinite x cos(x) must be NaN
+NaN,1e-6,NaN,NaN,cos(NaN) must be NaN
+3.14159265,NaN,NaN,NaN,with NaN precision result must be NaN
+3.14159265,+Infinity,NaN,NaN,with infinite precision result must be NaN
+3.14159265,-Infinity,NaN,NaN,with infinite precision result must be NaN

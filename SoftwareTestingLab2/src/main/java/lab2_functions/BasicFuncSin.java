@@ -10,7 +10,7 @@ public class BasicFuncSin {
 
         if (x.isInfinite() || x.isNaN() || precision.isNaN() || precision.isInfinite()) return Double.NaN;
 
-        if (x < precision) return 0.0;
+        if (abs(x) < precision) return 0.0;
 
         double result = 0;
         int seriesMemberNum = 1;
@@ -23,6 +23,7 @@ public class BasicFuncSin {
             seriesMemberNum++;
         }
 
+        if (abs(result) < precision) return 0.0;
         return result;
     }
 

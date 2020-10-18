@@ -20,7 +20,7 @@ class AdvancedLogFunctionsTest {
         BasicFuncLn mockLn = Mockito.mock(BasicFuncLn.class);
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log2_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log2_adv_func_test.csv", numLinesToSkip = 1)
         void testLog2AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             Mockito.when(mockLn.ln(Mockito.eq(x), Mockito.anyDouble())).thenReturn(lnX);
@@ -34,7 +34,7 @@ class AdvancedLogFunctionsTest {
         }
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log3_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log3_adv_func_test.csv", numLinesToSkip = 1)
         void testLog3AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             Mockito.when(mockLn.ln(Mockito.eq(x), Mockito.anyDouble())).thenReturn(lnX);
@@ -48,7 +48,7 @@ class AdvancedLogFunctionsTest {
         }
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log5_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log5_adv_func_test.csv", numLinesToSkip = 1)
         void testLog5AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             Mockito.when(mockLn.ln(Mockito.eq(x), Mockito.anyDouble())).thenReturn(lnX);
@@ -67,7 +67,7 @@ class AdvancedLogFunctionsTest {
     class AdvancedLogFunctionsIntegrationTest {
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log2_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log2_adv_func_test.csv", numLinesToSkip = 1)
         void testLog2AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             BasicFuncLn basicLn = new BasicFuncLn();
@@ -79,7 +79,7 @@ class AdvancedLogFunctionsTest {
         }
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log3_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log3_adv_func_test.csv", numLinesToSkip = 1)
         void testLog3AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             BasicFuncLn basicLn = new BasicFuncLn();
@@ -92,7 +92,7 @@ class AdvancedLogFunctionsTest {
 
 
         @ParameterizedTest
-        @CsvFileSource(resources = "/log5_adv_func_test.csv", numLinesToSkip = 1)
+        @CsvFileSource(resources = "/log_tests/log5_adv_func_test.csv", numLinesToSkip = 1)
         void testLog5AdvFunction(Double x, Double precision, Double expected, Double lnX, String msg) {
 
             BasicFuncLn basicLn = new BasicFuncLn();

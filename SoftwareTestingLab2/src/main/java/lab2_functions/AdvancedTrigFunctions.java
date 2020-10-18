@@ -15,20 +15,21 @@ public class AdvancedTrigFunctions {
     // trigonometry
 
     public Double cos(Double x, Double precision) {
-        if (x < -1 || x > 1) return Double.NaN;
         return basicSinFunc.sin(x + Math.PI/2, precision);
     }
 
     public Double tan(Double x, Double precision) {
         if (cos(x, precision) == 0) return Double.NaN;
-        return basicSinFunc.sin(x, precision) / cos(x, precision);
+        return basicSinFunc.sin(x, precision / 100) / cos(x, precision / 100);
     }
 
     public Double cot(Double x, Double precision) {
-        return cos(x, precision) / basicSinFunc.sin(x, precision);
+        if (basicSinFunc.sin(x, precision) == 0) return Double.NaN;
+        return cos(x, precision / 100) / basicSinFunc.sin(x, precision / 100);
     }
 
     public Double sec(Double x, Double precision) {
+        if (cos(x, precision) == 0) return Double.NaN;
         return 1.0 / cos(x, precision);
     }
 
