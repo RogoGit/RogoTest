@@ -1,0 +1,19 @@
+x,precision,expected,sin,cos,tan,cot,sec,ln,log2,log3,log5,msg
+-7.8539816,1e-5,NaN,-1,0,NaN,0,NaN,NaN,NaN,NaN,NaN,failed testing in -5pi/2: must be NaN
+-7.3,1e-5,-3.63623005,-0.8504366206,0.526077517,-1.616561424,-0.61859697,1.90086055,NaN,NaN,NaN,NaN,failed testing pre first local maxima in [-8;0]
+-6.76386,1e-5,-0.886508,-0.462378,0.886683,-0.521469,-1.91766,1.12779857,NaN,NaN,NaN,NaN,failed testing in first local maxima in [-8;0]
+-6.52814,1e-5,-0.942478,-0.242512,0.970148,-0.249975,-4.00041,1.03077,NaN,NaN,NaN,NaN,failed testing in first inflection point in [-8;0]
+-5.76656,1e-5,0.0000186246,0.493949,0.869491,0.568089,1.76029,1.15010,NaN,NaN,NaN,NaN,failed testing near first interception with zero in [-8;0]
+-5.4,1e-5,7.18602866,0.772764,0.634693,1.2175408,0.821328,1.575565,NaN,NaN,NaN,NaN,failed testing post inflection point value
+-4.71238898,1e-5,NaN,1,0,NaN,0,NaN,NaN,NaN,NaN,NaN,failed testing in -3pi/2: must be NaN
+-4.3,1e-6,10.74015083129,0.9161659,-0.400799,-2.285847877,-0.43747443,-2.495015134,NaN,NaN,NaN,NaN,failed testing in pre first local minima
+-3.8316,1e-5,0.161376,0.6365428,-0.7712413,-0.825348,-1.21161,-1.29661099,NaN,NaN,NaN,NaN,failed testing in first local minima in [-8;0]
+-3.06641,1e-5,1.15234,-0.075112,-0.997175,0.0753246,13.2758701,-1.0028329,NaN,NaN,NaN,NaN,failed testing in second inflection point in [-8;0]
+-2.70483,1e-5,1.68437,-0.423008,-0.906126,0.4668317,2.1420997,-1.10359948,NaN,NaN,NaN,NaN,failed testing in second local maxima in [-8;0]
+-2.3909,1e-5,-0.0000455,-0.682145,-0.73121655,0.932891,1.0719365,-1.367584,NaN,NaN,NaN,NaN,failed testing near second interception with zero in [-8;0]
+-2.25,1e-5,-3.925711835,-0.778073197,-0.62817362,1.2386276,0.80734515,-1.59191657,NaN,NaN,NaN,NaN,failed testing post second local maxima value
+-1.5707963,1e-5,NaN,-1,0,NaN,0,NaN,NaN,NaN,NaN,NaN,failed testing in -pi/2: must be NaN
+-1.2,1e-5,-22.54120343,-0.932039,0.362357754,-2.57215162,-0.388779569,2.7597036,NaN,NaN,NaN,NaN,failed testing in pre third local mixima value
+-0.480676,1e-5,-0.886508,-0.46237868,0.88668256,-0.52147037,-1.9176545,1.1277993,NaN,NaN,NaN,NaN,failed testing in third local maxima in [-8;0]
+-0.244952,1e-5,-0.942478,-0.2425098,0.970149,-0.24997167,-4.0004533,1.0307695,NaN,NaN,NaN,NaN,failed testing in third inflection point in [-8;0]
+0,1e-5,NaN,0,1,0,NaN,1,NaN,NaN,NaN,NaN,failed testing in x=0

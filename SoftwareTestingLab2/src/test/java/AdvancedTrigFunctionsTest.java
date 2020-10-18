@@ -1,11 +1,13 @@
 import lab2_functions.AdvancedTrigFunctions;
 import lab2_functions.BasicFuncSin;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 class AdvancedTrigFunctionsTest {
 
@@ -13,7 +15,12 @@ class AdvancedTrigFunctionsTest {
     class AdvancedLogFunctionsUnitTest {
 
         @Mock
-        BasicFuncSin mockSin = Mockito.mock(BasicFuncSin.class);
+        private BasicFuncSin mockSin;
+
+        @BeforeEach
+        void initMocks() {
+            MockitoAnnotations.initMocks(this);
+        }
 
         @ParameterizedTest
         @CsvFileSource(resources = "/trig_tests/cos_adv_func_test.csv", numLinesToSkip = 1)

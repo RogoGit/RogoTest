@@ -1,11 +1,13 @@
 import lab2_functions.AdvancedLogFunctions;
 import lab2_functions.BasicFuncLn;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 class AdvancedLogFunctionsTest {
 
@@ -17,7 +19,12 @@ class AdvancedLogFunctionsTest {
     class AdvancedLogFunctionsUnitTest {
 
         @Mock
-        BasicFuncLn mockLn = Mockito.mock(BasicFuncLn.class);
+        private BasicFuncLn mockLn;
+
+        @BeforeEach
+        void initMocks() {
+            MockitoAnnotations.initMocks(this);
+        }
 
         @ParameterizedTest
         @CsvFileSource(resources = "/log_tests/log2_adv_func_test.csv", numLinesToSkip = 1)

@@ -2,17 +2,23 @@ package lab2_functions;
 
 public class AdvancedTrigFunctions {
 
-    private BasicFuncSin basicSinFunc;
+    private BasicFuncSin basicSinFunc = new BasicFuncSin();
 
     public AdvancedTrigFunctions(BasicFuncSin basicFuncSin) {
         this.basicSinFunc = basicFuncSin;
     }
 
-    public BasicFuncSin getBasicSinFunc() {
+    public AdvancedTrigFunctions() {}
+
+    private BasicFuncSin getBasicSinFunc() {
         return basicSinFunc;
     }
 
     // trigonometry
+
+    public Double sin(Double x, Double precision) {
+        return this.getBasicSinFunc().sin(x, precision);
+    }
 
     public Double cos(Double x, Double precision) {
         return basicSinFunc.sin(x + Math.PI/2, precision);
