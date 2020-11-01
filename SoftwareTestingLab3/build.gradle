@@ -47,6 +47,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVersion}")
+
+    testCompile("io.github.bonigarcia:webdrivermanager:4.2.2")
 }
 
 test {
