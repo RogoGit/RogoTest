@@ -1,5 +1,6 @@
 package com.example.SoftwareTestingLab3.test_plans;
 
+import com.example.SoftwareTestingLab3.page_objects.GalleryItemPage;
 import com.example.SoftwareTestingLab3.page_objects.LoginPage;
 import com.example.SoftwareTestingLab3.page_objects.MainPage;
 import com.example.SoftwareTestingLab3.web_helpers.BrowsersList;
@@ -14,28 +15,37 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+public class GalleryPostTest {
 
-public class LoginTest {
     private WebDriver driver;
     private MainPage mainPage;
     private LoginPage loginPage;
+    private GalleryItemPage galleryItemPage;
+
 
     @ParameterizedTest
     @EnumSource(BrowsersList.class)
-    public void testUserRegistration(BrowsersList browser) {
+    public void testUserPostUpDownVoting(BrowsersList browser) {
 
         driver = DriverManager.setUpDriver(browser);
         mainPage = new MainPage(driver);
         mainPage.goToLoginPage();
-        //driver.get(URLConstants.LOG_IN_URL);
         loginPage = new LoginPage(driver);
         loginPage.login();
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOf(mainPage.currentUserName));
+        mainPage.goToFirstVideoInGallery();
+        galleryItemPage = new GalleryItemPage(driver);
 
-        Assert.assertEquals("Failed to login with given credentials",
-                UserCredentials.username, mainPage.getCurrentUserName());
+        //downvote post
+        Integer initialScore = galleryItemPage.getTotalPostScore();
+        galleryItemPage.downVotePost();
+        Assert.assertEquals("post score after downvote is wrong", (initialScore - 1), (int) galleryItemPage.getTotalPostScore());
+
+        //upvote post
+        Integer initialScoreNew = galleryItemPage.getTotalPostScore();
+        galleryItemPage.upVotePost();
+        Assert.assertEquals("post score after upvote is wrong", (initialScoreNew + 1), (int) galleryItemPage.getTotalPostScore());
+
     }
 
     @AfterEach

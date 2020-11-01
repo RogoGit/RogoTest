@@ -18,7 +18,10 @@ public class MainPage {
     private WebElement loginButton;
 
     @FindBy(xpath = "//div[contains(@class, 'title')]//span[not(@*)]")
-    private WebElement currentUserName;
+    public WebElement currentUserName;
+
+    @FindBy(xpath = "//a[contains(@href,'/gallery/')]")
+    private WebElement firstVideoInGallery;
 
     public void goToLoginPage() {
         loginButton.click();
@@ -26,6 +29,14 @@ public class MainPage {
 
     public String getCurrentUserName() {
         return currentUserName.getText();
+    }
+
+    public String getFirstVideoInGalleryPath() {
+        return firstVideoInGallery.getAttribute("href");
+    }
+
+    public void goToFirstVideoInGallery() {
+        firstVideoInGallery.click();
     }
 
 }
