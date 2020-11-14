@@ -26,6 +26,15 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'Gallery-Sidebar')]")
     public WebElement gallerySlideBar;
 
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'points')]")
+    public WebElement totalCommentPoints;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'vote-btn up')]/*[local-name() = 'svg']")
+    private WebElement upVoteCommentSvg;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'vote-btn down')]/*[local-name() = 'svg']")
+    private WebElement downVoteCommentSvg;
+
     // post voting
 
     public Integer getTotalPostScore() {
@@ -42,6 +51,24 @@ public class GalleryItemPage {
 
     public void downVotePost() {
         downVotePostSvg.click();
+    }
+
+    // comment voting
+
+    public Integer getTotalCommentPoints() {
+        try {
+            return Integer.parseInt(totalCommentPoints.getText().replace(",",""));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    public void upVoteComment() {
+        upVoteCommentSvg.click();
+    }
+
+    public void downVoteComment() {
+        downVoteCommentSvg.click();
     }
 
 }

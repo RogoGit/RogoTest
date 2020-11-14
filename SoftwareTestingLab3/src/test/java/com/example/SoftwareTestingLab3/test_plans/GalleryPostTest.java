@@ -6,10 +6,8 @@ import com.example.SoftwareTestingLab3.page_objects.MainPage;
 import com.example.SoftwareTestingLab3.web_helpers.BrowsersList;
 import com.example.SoftwareTestingLab3.web_helpers.DriverManager;
 import com.example.SoftwareTestingLab3.web_helpers.URLConstants;
-import com.example.SoftwareTestingLab3.web_helpers.UserCredentials;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.openqa.selenium.WebDriver;
@@ -98,6 +96,44 @@ public class GalleryPostTest {
             ex.printStackTrace();
         }
         Assert.assertEquals("post score after undo upvote is wrong", (initialScorePreUndoUp - 1), (int) galleryItemPage.getTotalPostScore());
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void testCommentUpDownVoting(BrowsersList browser) {
+
+        setUpEnvironment(browser);
+
+        driver.get(URLConstants.ANOTHER_USER_TEST_POST);
+        galleryItemPage = new GalleryItemPage(driver);
+
+        //downvote comment
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Integer initialPointsPreDown = galleryItemPage.getTotalCommentPoints();
+        galleryItemPage.downVoteComment();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals("comment points after downvote is wrong", (initialPointsPreDown - 1), (int) galleryItemPage.getTotalCommentPoints());
+
+        //undo downvote
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Integer initialPointsPreUndoDown = galleryItemPage.getTotalCommentPoints();
+        galleryItemPage.downVoteComment();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals("comment points after undo downvote is wrong", (initialPointsPreUndoDown + 1), (int) galleryItemPage.getTotalCommentPoints());
+
+        //upvote comment
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Integer initialPointsPreUp = galleryItemPage.getTotalCommentPoints();
+        galleryItemPage.upVoteComment();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals("comment points after upvote is wrong", (initialPointsPreUp + 1), (int) galleryItemPage.getTotalCommentPoints());
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Integer initialPointsPreUndoUp = galleryItemPage.getTotalCommentPoints();
+        galleryItemPage.upVoteComment();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals("comment points after undo upvote is wrong", (initialPointsPreUndoUp - 1), (int) galleryItemPage.getTotalCommentPoints());
 
     }
 
