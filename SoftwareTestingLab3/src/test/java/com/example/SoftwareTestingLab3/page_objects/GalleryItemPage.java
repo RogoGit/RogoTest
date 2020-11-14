@@ -1,9 +1,12 @@
 package com.example.SoftwareTestingLab3.page_objects;
 
+import com.example.SoftwareTestingLab3.web_helpers.UserCredentials;
+import com.example.SoftwareTestingLab3.web_helpers.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 
 public class GalleryItemPage {
 
@@ -34,6 +37,22 @@ public class GalleryItemPage {
 
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'vote-btn down')]/*[local-name() = 'svg']")
     private WebElement downVoteCommentSvg;
+
+    @FindBy(xpath = "//form[contains(@class,'Comment-create')]//textarea[contains(@class,'Comment-create')]")
+    public WebElement commentWriteSection;
+
+    @FindBy(xpath = "//form[contains(@class,'Comment-create')]//button[@type='submit']")
+    public WebElement postCommentButton;
+
+    @FindBy(xpath = "//div[@class='CommentsList-comments']")
+    public WebElement commentsListSection;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]" +
+            "//div[contains(@class,'Meta')]//a[@class='author-name'][text()='rrgggg']")
+    public WebElement commentByAuthor;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//span[@class='Linkify']")
+    public WebElement commentBody;
 
     // post voting
 
@@ -69,6 +88,15 @@ public class GalleryItemPage {
 
     public void downVoteComment() {
         downVoteCommentSvg.click();
+    }
+
+    // comments posting
+
+    public String postComment() {
+        String comment = Util.createRandomSequence(20);
+        commentWriteSection.sendKeys(comment);
+        postCommentButton.click();
+        return comment;
     }
 
 }

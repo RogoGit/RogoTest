@@ -1,15 +1,14 @@
-package com.example.SoftwareTestingLab3.test_plans;
+package com.example.SoftwareTestingLab3.tests;
 
 import com.example.SoftwareTestingLab3.page_objects.GalleryItemPage;
 import com.example.SoftwareTestingLab3.page_objects.LoginPage;
 import com.example.SoftwareTestingLab3.page_objects.MainPage;
-import com.example.SoftwareTestingLab3.web_helpers.BrowsersList;
-import com.example.SoftwareTestingLab3.web_helpers.DriverManager;
-import com.example.SoftwareTestingLab3.web_helpers.URLConstants;
+import com.example.SoftwareTestingLab3.web_helpers.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -108,8 +107,11 @@ public class GalleryPostTest {
         driver.get(URLConstants.ANOTHER_USER_TEST_POST);
         galleryItemPage = new GalleryItemPage(driver);
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,500)");
+
         //downvote comment
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Integer initialPointsPreDown = galleryItemPage.getTotalCommentPoints();
         galleryItemPage.downVoteComment();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -134,6 +136,32 @@ public class GalleryPostTest {
         galleryItemPage.upVoteComment();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Assert.assertEquals("comment points after undo upvote is wrong", (initialPointsPreUndoUp - 1), (int) galleryItemPage.getTotalCommentPoints());
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void testCommentPosting(BrowsersList browser) {
+
+        setUpEnvironment(browser);
+
+        driver.get(URLConstants.TEST_POST_URL);
+        galleryItemPage = new GalleryItemPage(driver);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,500)");
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentWriteSection));
+
+        //String commentBody = galleryItemPage.postComment();
+        String commentBody = Util.createRandomSequence(20);
+        galleryItemPage.commentWriteSection.sendKeys(commentBody);
+        js.executeScript("arguments[0].click();", galleryItemPage.postCommentButton);
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals("comment author is wrong", UserCredentials.username, galleryItemPage.commentByAuthor.getText());
+        Assert.assertEquals("comment body is wrong", commentBody, galleryItemPage.commentBody.getText());
 
     }
 

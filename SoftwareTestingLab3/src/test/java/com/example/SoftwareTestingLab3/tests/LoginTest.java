@@ -1,4 +1,4 @@
-package com.example.SoftwareTestingLab3.test_plans;
+package com.example.SoftwareTestingLab3.tests;
 
 import com.example.SoftwareTestingLab3.page_objects.LoginPage;
 import com.example.SoftwareTestingLab3.page_objects.MainPage;
