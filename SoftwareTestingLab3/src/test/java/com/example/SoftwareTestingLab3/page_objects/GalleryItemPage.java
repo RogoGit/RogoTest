@@ -15,7 +15,7 @@ public class GalleryItemPage {
     }
 
     @FindBy(xpath = "//div[contains(@class,'score')]//span[contains(@title,'Score')]")
-    private WebElement totalScore;
+    public WebElement totalScore;
 
     @FindBy(xpath = "//div[contains(@class,'btn-upvote')]/*[local-name() = 'svg']")
     private WebElement upVotePostSvg;
@@ -23,10 +23,17 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'btn-downvote')]/*[local-name() = 'svg']")
     private WebElement downVotePostSvg;
 
+    @FindBy(xpath = "//div[contains(@class,'Gallery-Sidebar')]")
+    public WebElement gallerySlideBar;
+
     // post voting
 
     public Integer getTotalPostScore() {
-        return Integer.parseInt(totalScore.getText());
+        try {
+            return Integer.parseInt(totalScore.getText().replace(",",""));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
     }
 
     public void upVotePost() {
