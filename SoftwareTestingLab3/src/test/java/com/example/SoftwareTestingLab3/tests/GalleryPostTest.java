@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,11 +19,13 @@ import java.util.concurrent.TimeUnit;
 public class GalleryPostTest {
 
     private WebDriver driver;
-    private MainPage mainPage;
-    private LoginPage loginPage;
     private GalleryItemPage galleryItemPage;
 
     private void setUpEnvironment(BrowsersList browser) {
+
+        MainPage mainPage;
+        LoginPage loginPage;
+
         driver = DriverManager.setUpDriver(browser);
         mainPage = new MainPage(driver);
         mainPage.goToLoginPage();
@@ -108,7 +111,7 @@ public class GalleryPostTest {
         galleryItemPage = new GalleryItemPage(driver);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0,500)");
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.postImage);
 
         //downvote comment
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -149,12 +152,11 @@ public class GalleryPostTest {
         galleryItemPage = new GalleryItemPage(driver);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0,500)");
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.postImage);
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentWriteSection));
 
-        //String commentBody = galleryItemPage.postComment();
         String commentBody = Util.createRandomSequence(20);
         galleryItemPage.commentWriteSection.sendKeys(commentBody);
         js.executeScript("arguments[0].click();", galleryItemPage.postCommentButton);
@@ -162,6 +164,56 @@ public class GalleryPostTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Assert.assertEquals("comment author is wrong", UserCredentials.username, galleryItemPage.commentByAuthor.getText());
         Assert.assertEquals("comment body is wrong", commentBody, galleryItemPage.commentBody.getText());
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void testCommentDeleting(BrowsersList browser) {
+
+        setUpEnvironment(browser);
+
+        driver.get(URLConstants.TEST_POST_URL);
+        galleryItemPage = new GalleryItemPage(driver);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.postImage);
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentsListSection));
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(galleryItemPage.commentByAuthor).perform();
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        String commentBody = galleryItemPage.commentBody.getText();
+
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDropdown));
+        galleryItemPage.showCommentActionsMenu();
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDeleteButton));
+        galleryItemPage.deleteComment(js);
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertFalse("comment did not disappear", driver.getPageSource().contains(commentBody));
 
     }
 

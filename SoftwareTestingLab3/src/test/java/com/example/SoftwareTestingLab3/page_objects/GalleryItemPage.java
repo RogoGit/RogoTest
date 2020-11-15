@@ -1,7 +1,6 @@
 package com.example.SoftwareTestingLab3.page_objects;
 
-import com.example.SoftwareTestingLab3.web_helpers.UserCredentials;
-import com.example.SoftwareTestingLab3.web_helpers.Util;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +28,9 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'Gallery-Sidebar')]")
     public WebElement gallerySlideBar;
 
+    @FindBy(xpath = "//div[@class='Gallery-Content']//img")
+    public WebElement postImage;
+
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'points')]")
     public WebElement totalCommentPoints;
 
@@ -53,6 +55,13 @@ public class GalleryItemPage {
 
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//span[@class='Linkify']")
     public WebElement commentBody;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'Dropdown-title')]/*[local-name() = 'svg']")
+    public WebElement commentDropdown;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'Dropdown-menu')]//span[text()='Delete']/..")
+    public WebElement commentDeleteButton;
+
 
     // post voting
 
@@ -90,13 +99,15 @@ public class GalleryItemPage {
         downVoteCommentSvg.click();
     }
 
-    // comments posting
+    // comment deleting
 
-    public String postComment() {
-        String comment = Util.createRandomSequence(20);
-        commentWriteSection.sendKeys(comment);
-        postCommentButton.click();
-        return comment;
+    public void showCommentActionsMenu() {
+        commentDropdown.click();
+    }
+
+    public void deleteComment(JavascriptExecutor js) {
+        js.executeScript("arguments[0].click();", this.commentDeleteButton);
+        //commentDeleteButton.click();
     }
 
 }

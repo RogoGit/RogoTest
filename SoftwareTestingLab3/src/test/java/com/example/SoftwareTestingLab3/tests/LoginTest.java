@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTest {
     private WebDriver driver;
     private MainPage mainPage;
@@ -27,6 +29,7 @@ public class LoginTest {
         mainPage.goToLoginPage();
         //driver.get(URLConstants.LOG_IN_URL);
         loginPage = new LoginPage(driver);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage.login();
 
         WebDriverWait wait = new WebDriverWait(driver, 5);

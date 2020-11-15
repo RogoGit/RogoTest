@@ -23,7 +23,7 @@ public class DriverManager {
             driver = new ChromeDriver();
         }
 
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(URLConstants.BASE_URL);
 
