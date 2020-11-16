@@ -1,5 +1,6 @@
 package com.example.SoftwareTestingLab3.tests;
 
+import com.example.SoftwareTestingLab3.page_objects.FileUploadPage;
 import com.example.SoftwareTestingLab3.page_objects.LoginPage;
 import com.example.SoftwareTestingLab3.page_objects.MainPage;
 import com.example.SoftwareTestingLab3.web_helpers.BrowsersList;
@@ -15,20 +16,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
+public class PostCreationTest {
+
     private WebDriver driver;
 
     @ParameterizedTest
     @EnumSource(BrowsersList.class)
-    public void testUserLogin(BrowsersList browser) {
+    public void testPostCreation(BrowsersList browser) {
 
         MainPage mainPage;
         LoginPage loginPage;
+        FileUploadPage uploadPage;
+
+        // log in
 
         driver = DriverManager.setUpDriver(browser);
         mainPage = new MainPage(driver);
         mainPage.goToLoginPage();
-        //driver.get(URLConstants.LOG_IN_URL);
         loginPage = new LoginPage(driver);
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
@@ -38,11 +42,14 @@ public class LoginTest {
         }
         loginPage.login();
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOf(mainPage.currentUserName));
+        // go to post creation
+        mainPage.goToUpload();
+        uploadPage = new FileUploadPage(driver);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        uploadPage.uploadImage();
 
-        Assert.assertEquals("Failed to login with given credentials",
-                UserCredentials.username, mainPage.getCurrentUserName());
+
+
     }
 
     @AfterEach

@@ -23,12 +23,19 @@ public class MainPage {
     @FindBy(xpath = "//a[contains(@href,'/gallery/')]")
     private WebElement firstVideoInGallery;
 
+    @FindBy(xpath = "//a[contains(@href,'upload')]")
+    public WebElement newPostButton;
+
     public void goToLoginPage() {
         loginButton.click();
     }
 
     public String getCurrentUserName() {
         return currentUserName.getText();
+    }
+
+    public void goToUpload() {
+        newPostButton.click();
     }
 
     public String getFirstVideoInGalleryPath() {
