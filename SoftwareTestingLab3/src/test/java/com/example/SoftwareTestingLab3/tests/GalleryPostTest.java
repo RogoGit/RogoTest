@@ -31,7 +31,7 @@ public class GalleryPostTest {
         mainPage.goToLoginPage();
         loginPage = new LoginPage(driver);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -181,7 +181,7 @@ public class GalleryPostTest {
         galleryItemPage = new GalleryItemPage(driver);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.commentsListSection);
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.commentWriteSection);
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentsListSection));
@@ -190,37 +190,65 @@ public class GalleryPostTest {
         actions.moveToElement(galleryItemPage.commentBody).perform();
         galleryItemPage.commentBody.click();
 
-        /*try {
-            Thread.sleep(4000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }*/
-
         String commentBody = galleryItemPage.commentBody.getText();
 
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDropdown));
         galleryItemPage.showCommentActionsMenu();
 
-       /* try {
-            Thread.sleep(4000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }*/
-
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDeleteButton));
         galleryItemPage.deleteComment(js);
-
-       /* try {
-            Thread.sleep(4000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }*/
-
 
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.confirmCommentDeleteButton));
         galleryItemPage.confirmCommentDelete();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Assert.assertFalse("comment did not disappear", driver.getPageSource().contains(commentBody));
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void testCommentReplyPosting(BrowsersList browser) {
+
+        setUpEnvironment(browser);
+
+        driver.get(URLConstants.TEST_POST_URL);
+        galleryItemPage = new GalleryItemPage(driver);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.postImage);
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentWriteSection));
+
+        String commentBody = Util.createRandomSequence(20);
+        galleryItemPage.commentWriteSection.sendKeys(commentBody);
+        js.executeScript("arguments[0].click();", galleryItemPage.postCommentButton);
+
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.commentWriteSection);
+        wait.until(ExpectedConditions.elementToBeClickable(galleryItemPage.commentBody));
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(galleryItemPage.commentBody).perform();
+        galleryItemPage.commentBody.click();
+
+        String replyBody = Util.createRandomSequence(20);
+        if (browser.equals(BrowsersList.FIREFOX)) {
+            wait.until(ExpectedConditions.elementToBeClickable(galleryItemPage.replyToCommentButton));
+        }
+        galleryItemPage.replyToCommentButton.click();
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.replyWriteArea));
+        galleryItemPage.replyWriteArea.sendKeys(replyBody);
+        wait.until(ExpectedConditions.elementToBeClickable(galleryItemPage.postReplyButton));
+        js.executeScript("arguments[0].click();", galleryItemPage.postReplyButton);
+
+        //wait.until(ExpectedConditions.elementToBeClickable(galleryItemPage.commentReply));
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        Assert.assertTrue("comment did not appear", driver.getPageSource().contains(replyBody));
 
     }
 

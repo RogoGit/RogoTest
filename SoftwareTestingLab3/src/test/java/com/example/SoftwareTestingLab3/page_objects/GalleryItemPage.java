@@ -65,6 +65,21 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'DeleteCommentDialog')]//button[@type='submit'][contains(@title,'Delete')]")
     public WebElement confirmCommentDeleteButton;
 
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//button[contains(@class,'reply')]")
+    public WebElement replyToCommentButton;
+
+    @FindBy(xpath = "//div[@class='GalleryComment-reply']//textarea[contains(@placeholder,'reply')]")
+    public WebElement replyWriteArea;
+
+    @FindBy(xpath = "//div[@class='GalleryComment-reply']//button[@type='submit']")
+    public WebElement postReplyButton;
+
+    @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//button[@class='toggle-replies actions-btn']")
+    public WebElement showReplies;
+
+    @FindBy(xpath = "//div[@class='GalleryComment-replies']")
+    public WebElement commentReply;
+
     // post voting
 
     public Integer getTotalPostScore() {
@@ -114,6 +129,19 @@ public class GalleryItemPage {
 
     public void confirmCommentDelete() {
         confirmCommentDeleteButton.click();
+    }
+
+    // comment replying
+    public void replyToComment() {
+        replyToCommentButton.click();
+    }
+
+    public void postReply() {
+        postReplyButton.click();
+    }
+
+    public void showReplies() {
+        showReplies.click();
     }
 
 }
