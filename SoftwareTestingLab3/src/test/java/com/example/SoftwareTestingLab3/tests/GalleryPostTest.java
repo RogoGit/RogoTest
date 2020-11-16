@@ -30,6 +30,11 @@ public class GalleryPostTest {
         mainPage = new MainPage(driver);
         mainPage.goToLoginPage();
         loginPage = new LoginPage(driver);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         loginPage.login();
     }
 
@@ -46,7 +51,7 @@ public class GalleryPostTest {
 
         // I am sorry, but it seems to me that I it's the only solution
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -162,8 +167,7 @@ public class GalleryPostTest {
         js.executeScript("arguments[0].click();", galleryItemPage.postCommentButton);
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        Assert.assertEquals("comment author is wrong", UserCredentials.username, galleryItemPage.commentByAuthor.getText());
-        Assert.assertEquals("comment body is wrong", commentBody, galleryItemPage.commentBody.getText());
+        Assert.assertTrue("comment did not appear", driver.getPageSource().contains(commentBody));
 
     }
 
@@ -177,41 +181,44 @@ public class GalleryPostTest {
         galleryItemPage = new GalleryItemPage(driver);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.postImage);
+        js.executeScript("arguments[0].scrollIntoView(true);", galleryItemPage.commentsListSection);
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentsListSection));
 
         Actions actions = new Actions(driver);
-        actions.moveToElement(galleryItemPage.commentByAuthor).perform();
+        actions.moveToElement(galleryItemPage.commentBody).perform();
+        galleryItemPage.commentBody.click();
 
-        try {
+        /*try {
             Thread.sleep(4000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
         String commentBody = galleryItemPage.commentBody.getText();
 
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDropdown));
         galleryItemPage.showCommentActionsMenu();
 
-        try {
+       /* try {
             Thread.sleep(4000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
         wait.until(ExpectedConditions.visibilityOf(galleryItemPage.commentDeleteButton));
         galleryItemPage.deleteComment(js);
 
-        try {
+       /* try {
             Thread.sleep(4000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
 
+        wait.until(ExpectedConditions.visibilityOf(galleryItemPage.confirmCommentDeleteButton));
+        galleryItemPage.confirmCommentDelete();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Assert.assertFalse("comment did not disappear", driver.getPageSource().contains(commentBody));
 

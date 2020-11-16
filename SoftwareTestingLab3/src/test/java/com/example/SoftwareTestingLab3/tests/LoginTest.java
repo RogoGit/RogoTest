@@ -29,7 +29,12 @@ public class LoginTest {
         mainPage.goToLoginPage();
         //driver.get(URLConstants.LOG_IN_URL);
         loginPage = new LoginPage(driver);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         loginPage.login();
 
         WebDriverWait wait = new WebDriverWait(driver, 5);

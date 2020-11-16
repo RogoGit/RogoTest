@@ -62,6 +62,8 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'Dropdown-menu')]//span[text()='Delete']/..")
     public WebElement commentDeleteButton;
 
+    @FindBy(xpath = "//div[contains(@class,'DeleteCommentDialog')]//button[@type='submit'][contains(@title,'Delete')]")
+    public WebElement confirmCommentDeleteButton;
 
     // post voting
 
@@ -108,6 +110,10 @@ public class GalleryItemPage {
     public void deleteComment(JavascriptExecutor js) {
         js.executeScript("arguments[0].click();", this.commentDeleteButton);
         //commentDeleteButton.click();
+    }
+
+    public void confirmCommentDelete() {
+        confirmCommentDeleteButton.click();
     }
 
 }
