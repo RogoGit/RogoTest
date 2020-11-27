@@ -16,6 +16,12 @@ public class GalleryItemPage {
         this.driver = driver;
     }
 
+    @FindBy(xpath = "//div[contains(@class,'Gallery-Title')]//span")
+    public WebElement postTitle;
+
+    @FindBy(xpath = "//div[contains(@class,'Gallery-Content')][contains(@class,'descr')]//span[@class='Linkify']")
+    public WebElement postDescription;
+
     @FindBy(xpath = "//div[contains(@class,'score')]//span[contains(@title,'Score')]")
     public WebElement totalScore;
 
@@ -79,6 +85,9 @@ public class GalleryItemPage {
 
     @FindBy(xpath = "//div[@class='GalleryComment-replies']")
     public WebElement commentReply;
+
+    @FindBy(xpath = "//a[contains(@href,'/t/mysterious_glitch')]")
+    public WebElement specialTag;
 
     // post voting
 
