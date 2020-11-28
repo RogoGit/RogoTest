@@ -20,6 +20,12 @@ public class MainPage {
     @FindBy(xpath = "//div[contains(@class, 'title')]//span[not(@*)]")
     public WebElement currentUserName;
 
+    @FindBy(xpath = "//a[contains(@href,'/posts')]")
+    public WebElement toUserPosts;
+
+    @FindBy(xpath = "//a[contains(@href,'/favorites')]")
+    public WebElement toUserFavorites;
+
     @FindBy(xpath = "//a[contains(@href,'/gallery/')]")
     private WebElement firstVideoInGallery;
 
@@ -36,6 +42,14 @@ public class MainPage {
 
     public void goToUpload() {
         newPostButton.click();
+    }
+
+    public void showUserMenu() {
+        currentUserName.click();
+    }
+
+    public void gotoPostsPage() {
+        toUserPosts.click();
     }
 
     public String getFirstVideoInGalleryPath() {

@@ -16,6 +16,13 @@ public class PostCreationPage {
         this.driver = driver;
     }
 
+    @FindBy(xpath = "//div[contains(@class, 'title')]//span[not(@*)]")
+    public WebElement currentUserName;
+
+    //@FindBy(xpath = "//a[contains(@href,'posts')]")
+    @FindBy(xpath = "//*[text()='Posts']")
+    public WebElement toUserPosts;
+
     @FindBy(xpath = "//div[@class='UploadPost-postTitle']//span[contains(@placeholder,'title')]")
     private WebElement postTitle;
 
@@ -34,6 +41,15 @@ public class PostCreationPage {
     @FindBy(xpath = "//button[contains(@class,'confirm--public')]")
     public WebElement confirmPublic;
 
+    @FindBy(xpath = "//img[contains(@class,'delete')]/..")
+    public WebElement deletePostButton;
+
+    @FindBy(xpath = "//button[contains(@class,'DeleteAlbumDialog-confirm')]")
+    public WebElement confirmDelete;
+
+    @FindBy(xpath = "//div[@class='Dropdown-menu ']")
+    public WebElement userHrefsDropdown;
+
     public void addPostTitle(JavascriptExecutor js, String title) {
         postTitle.sendKeys(title);
         //js.executeScript("arguments[0].textContent= arguments[1];", postTitle, title);
@@ -42,6 +58,23 @@ public class PostCreationPage {
     public void addImageDescription(JavascriptExecutor js, String description) {
         imageDescription.sendKeys(description);
         //js.executeScript("arguments[0].textContent= arguments[1];", imageDescription, description);
+    }
+
+    public void showUserMenu() {
+        currentUserName.click();
+    }
+
+    public void gotoPostsPage(JavascriptExecutor js) {
+        //js.executeScript("arguments[0].click()",toUserPosts);
+        toUserPosts.click();
+    }
+
+    public void deletePost() {
+        deletePostButton.click();
+    }
+
+    public void confirmDelete() {
+        confirmDelete.click();
     }
 
     public void clickAddTag() {

@@ -46,6 +46,9 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//div[contains(@class,'vote-btn down')]/*[local-name() = 'svg']")
     private WebElement downVoteCommentSvg;
 
+    @FindBy(xpath = "//div[contains(@class,'favorite')]/*[local-name() = 'svg']")
+    private WebElement addToFavoritesSvg;
+
     @FindBy(xpath = "//form[contains(@class,'Comment-create')]//textarea[contains(@class,'Comment-create')]")
     public WebElement commentWriteSection;
 
@@ -56,7 +59,7 @@ public class GalleryItemPage {
     public WebElement commentsListSection;
 
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]" +
-            "//div[contains(@class,'Meta')]//a[@class='author-name'][text()='rrgggg']")
+            "//div[contains(@class,'Meta')]//a[@class='author-name'][text()='notbanmepls']")
     public WebElement commentByAuthor;
 
     @FindBy(xpath = "//div[contains(@class,'GalleryComment')]//span[@class='Linkify']")
@@ -105,6 +108,10 @@ public class GalleryItemPage {
 
     public void downVotePost() {
         downVotePostSvg.click();
+    }
+
+    public void addToFavorites() {
+        addToFavoritesSvg.click();
     }
 
     // comment voting

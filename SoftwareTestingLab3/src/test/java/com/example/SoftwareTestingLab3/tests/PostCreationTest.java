@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -17,16 +18,15 @@ import java.util.concurrent.TimeUnit;
 public class PostCreationTest {
 
     private WebDriver driver;
+    MainPage mainPage;
+    LoginPage loginPage;
+    FileUploadPage uploadPage;
+    PostCreationPage postCreationPage;
+    UserPostsPage userPostsPage;
 
     @ParameterizedTest
     @EnumSource(BrowsersList.class)
     public void testPostCreation(BrowsersList browser) {
-
-        MainPage mainPage;
-        LoginPage loginPage;
-        FileUploadPage uploadPage;
-        PostCreationPage postCreationPage;
-        GalleryItemPage postPage;
 
         // log in
 
@@ -34,7 +34,6 @@ public class PostCreationTest {
         mainPage = new MainPage(driver);
         mainPage.goToLoginPage();
         loginPage = new LoginPage(driver);
-        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
             Thread.sleep(1500);
         } catch (InterruptedException ex) {
@@ -43,6 +42,7 @@ public class PostCreationTest {
         loginPage.login();
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, 5);
 
         // go to post image uploading
         mainPage.goToUpload();
@@ -57,18 +57,41 @@ public class PostCreationTest {
         postCreationPage = new PostCreationPage(driver);
         postCreationPage.addPostTitle(js, postTitle);
         postCreationPage.addImageDescription(js, postDescription);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        postCreationPage.showUserMenu();
+        postCreationPage.gotoPostsPage(js);
+
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        userPostsPage = new UserPostsPage(driver);
+        userPostsPage.gotoAll();
+        wait.until(ExpectedConditions.visibilityOf(userPostsPage.firstPost));
+        Assert.assertTrue("post did not appear", driver.getPageSource().contains(postTitle));
+
         //postCreationPage.clickAddTag();
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         //wait.until(ExpectedConditions.visibilityOf(postCreationPage.tagActive));
         //postCreationPage.addTag(js, URLConstants.tagForPosts);
         //wait.until(ExpectedConditions.elementToBeClickable(postCreationPage.toCommunityButton));
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        try {
+
+        /*try {
             Thread.sleep(2300);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-        }
+
         postCreationPage.makePostPublic(js);
         wait.until(ExpectedConditions.visibilityOf(postCreationPage.confirmPublic));
         if (browser.equals(BrowsersList.CHROME)) {
@@ -82,10 +105,35 @@ public class PostCreationTest {
             ex.printStackTrace();
         }
 
-        // check post
+         check post
         postPage = new GalleryItemPage(driver);
         Assert.assertEquals("Post title is wrong", postPage.postTitle.getText(), postTitle);
-        Assert.assertEquals("Post description is wrong", postPage.postDescription.getText(), postDescription);
+        Assert.assertEquals("Post description is wrong", postPage.postDescription.getText(), postDescription); */
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void deletePost(BrowsersList browser) {
+
+        // log in
+        driver = DriverManager.setUpDriver(browser);
+        mainPage = new MainPage(driver);
+        mainPage.goToLoginPage();
+        loginPage = new LoginPage(driver);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        loginPage.login();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+
+        //
+
 
     }
 
