@@ -17,13 +17,13 @@ public class MainPage {
     @FindBy(xpath = "//a[contains(@class, 'signin')]")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//div[contains(@class, 'title')]//span[not(@*)]")
+    @FindBy(xpath = "//div[contains(@class,'UserMenu')]//div[contains(@class, 'title')]//span[not(@*)]")
     public WebElement currentUserName;
 
-    @FindBy(xpath = "//a[contains(@href,'/posts')]")
+    @FindBy(xpath = "//*[text()='Posts']")
     public WebElement toUserPosts;
 
-    @FindBy(xpath = "//a[contains(@href,'/favorites')]")
+    @FindBy(xpath = "//*[text()='Favorites']")
     public WebElement toUserFavorites;
 
     @FindBy(xpath = "//a[contains(@href,'/gallery/')]")

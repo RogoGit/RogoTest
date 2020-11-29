@@ -17,7 +17,7 @@ public class UserPostsPage {
     @FindBy(xpath = "//div[@class='Post-item-container']//div[contains(@class,'item-title')]//span")
     public WebElement firstPostTitle;
 
-    @FindBy(xpath = "//div[@class='Post-item-container']")
+    @FindBy(xpath = "//a[@class='Post-item novote']")
     public WebElement firstPost;
 
     @FindBy(xpath = "//a[text()='all']")

@@ -23,11 +23,17 @@ public class PostCreationPage {
     @FindBy(xpath = "//*[text()='Posts']")
     public WebElement toUserPosts;
 
+    @FindBy(xpath = "//*[text()='Delete image']")
+    public WebElement deleteImage;
+
     @FindBy(xpath = "//div[@class='UploadPost-postTitle']//span[contains(@placeholder,'title')]")
-    private WebElement postTitle;
+    public WebElement postTitle;
 
     @FindBy(xpath = "//div[contains(@class,'ImageDescription')][contains(@class,'editable')]")
     private WebElement imageDescription;
+
+    @FindBy(xpath = "//div[contains(@class,'imageWrapper')]")
+    public WebElement image;
 
     @FindBy(xpath = "//button[@type='submit'][contains(@title,'Community')]")
     public WebElement toCommunityButton;
@@ -44,8 +50,14 @@ public class PostCreationPage {
     @FindBy(xpath = "//img[contains(@class,'delete')]/..")
     public WebElement deletePostButton;
 
-    @FindBy(xpath = "//button[contains(@class,'DeleteAlbumDialog-confirm')]")
+    @FindBy(xpath = "//button[contains(@class,'--do')]")
     public WebElement confirmDelete;
+
+    @FindBy(xpath = "//button[contains(@class,'--accountRemove')]")
+    public WebElement confirmImageDelete;
+
+    @FindBy(xpath = "//div[@class='Dropdown image-options']")
+    public WebElement imageOptions;
 
     @FindBy(xpath = "//div[@class='Dropdown-menu ']")
     public WebElement userHrefsDropdown;
@@ -67,6 +79,18 @@ public class PostCreationPage {
     public void gotoPostsPage(JavascriptExecutor js) {
         //js.executeScript("arguments[0].click()",toUserPosts);
         toUserPosts.click();
+    }
+
+    public void showImageOptions() {
+        imageOptions.click();
+    }
+
+    public void deleteImage() {
+        deleteImage.click();
+    }
+
+    public void confirmImageDelete() {
+        confirmImageDelete.click();
     }
 
     public void deletePost() {
