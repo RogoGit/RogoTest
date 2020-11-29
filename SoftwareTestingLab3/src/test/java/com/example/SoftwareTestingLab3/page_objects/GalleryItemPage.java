@@ -61,6 +61,9 @@ public class GalleryItemPage {
     @FindBy(xpath = "//*[text()='All Favorites']")
     public WebElement chooseAllFavorites;
 
+    @FindBy(xpath = "//*[text()='New Folder']")
+    public WebElement chooseNewFolderFavorites;
+
     @FindBy(xpath = "//form[contains(@class,'Comment-create')]//textarea[contains(@class,'Comment-create')]")
     public WebElement commentWriteSection;
 
@@ -140,6 +143,10 @@ public class GalleryItemPage {
 
     public void chooseAllFavorites() {
         chooseAllFavorites.click();
+    }
+
+    public void chooseNewFolderFavorites() {
+        chooseNewFolderFavorites.click();
     }
 
     // comment voting

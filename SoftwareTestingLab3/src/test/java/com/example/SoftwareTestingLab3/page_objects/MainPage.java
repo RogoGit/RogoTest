@@ -32,6 +32,12 @@ public class MainPage {
     @FindBy(xpath = "(//a[contains(@href,'/gallery/')])[2]")
     public WebElement secondVideoInGallery;
 
+    @FindBy(xpath = "(//a[contains(@href,'/gallery/')])[3]")
+    public WebElement thirdVideoInGallery;
+
+    @FindBy(xpath = "(//a[contains(@href,'/gallery/')])[4]")
+    public WebElement forthVideoInGallery;
+
     @FindBy(xpath = "//a[contains(@href,'upload')]")
     public WebElement newPostButton;
 
@@ -68,5 +74,9 @@ public class MainPage {
     }
 
     public void goToSecondVideoInGallery() {secondVideoInGallery.click();}
+
+    public void goToThirdVideoInGallery() {thirdVideoInGallery.click();}
+
+    public void goToFourthVideoInGallery() {forthVideoInGallery.click();}
 
 }
