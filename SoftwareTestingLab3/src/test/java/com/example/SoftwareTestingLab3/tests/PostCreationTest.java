@@ -17,17 +17,14 @@ import java.util.concurrent.TimeUnit;
 public class PostCreationTest {
 
     private WebDriver driver;
-    MainPage mainPage;
-    LoginPage loginPage;
-    FileUploadPage uploadPage;
-    PostCreationPage postCreationPage;
-    UserPostsPage userPostsPage;
+    private MainPage mainPage;
+    private FileUploadPage uploadPage;
+    private PostCreationPage postCreationPage;
+    private UserPostsPage userPostsPage;
 
-    @ParameterizedTest
-    @EnumSource(BrowsersList.class)
-    public void testPostCreation(BrowsersList browser) {
+    private void setUpEnvironment(BrowsersList browser) {
 
-        // log in
+        LoginPage loginPage;
 
         driver = DriverManager.setUpDriver(browser);
         mainPage = new MainPage(driver);
@@ -39,6 +36,15 @@ public class PostCreationTest {
             ex.printStackTrace();
         }
         loginPage.login();
+    }
+
+    @ParameterizedTest
+    @EnumSource(BrowsersList.class)
+    public void testPostCreation(BrowsersList browser) {
+
+        // log in
+
+       setUpEnvironment(browser);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -109,17 +115,7 @@ public class PostCreationTest {
     public void deletePost(BrowsersList browser) {
 
         // log in
-        driver = DriverManager.setUpDriver(browser);
-        mainPage = new MainPage(driver);
-        mainPage.goToLoginPage();
-        loginPage = new LoginPage(driver);
-        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        loginPage.login();
+       setUpEnvironment(browser);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, 5);

@@ -27,7 +27,10 @@ public class MainPage {
     public WebElement toUserFavorites;
 
     @FindBy(xpath = "//a[contains(@href,'/gallery/')]")
-    private WebElement firstVideoInGallery;
+    public WebElement firstVideoInGallery;
+
+    @FindBy(xpath = "(//a[contains(@href,'/gallery/')])[2]")
+    public WebElement secondVideoInGallery;
 
     @FindBy(xpath = "//a[contains(@href,'upload')]")
     public WebElement newPostButton;
@@ -52,6 +55,10 @@ public class MainPage {
         toUserPosts.click();
     }
 
+    public void gotoFavoritesPage() {
+        toUserFavorites.click();
+    }
+
     public String getFirstVideoInGalleryPath() {
         return firstVideoInGallery.getAttribute("href");
     }
@@ -59,5 +66,7 @@ public class MainPage {
     public void goToFirstVideoInGallery() {
         firstVideoInGallery.click();
     }
+
+    public void goToSecondVideoInGallery() {secondVideoInGallery.click();}
 
 }

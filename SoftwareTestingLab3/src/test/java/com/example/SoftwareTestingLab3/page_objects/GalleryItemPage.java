@@ -16,6 +16,15 @@ public class GalleryItemPage {
         this.driver = driver;
     }
 
+    @FindBy(xpath = "//div[contains(@class,'UserMenu')]//div[contains(@class, 'title')]//span[not(@*)]")
+    public WebElement currentUserName;
+
+    @FindBy(xpath = "//*[text()='Posts']")
+    public WebElement toUserPosts;
+
+    @FindBy(xpath = "//*[text()='Favorites']")
+    public WebElement toUserFavorites;
+
     @FindBy(xpath = "//div[contains(@class,'Gallery-Title')]//span")
     public WebElement postTitle;
 
@@ -48,6 +57,9 @@ public class GalleryItemPage {
 
     @FindBy(xpath = "//div[contains(@class,'favorite')]/*[local-name() = 'svg']")
     private WebElement addToFavoritesSvg;
+
+    @FindBy(xpath = "//*[text()='All Favorites']")
+    public WebElement chooseAllFavorites;
 
     @FindBy(xpath = "//form[contains(@class,'Comment-create')]//textarea[contains(@class,'Comment-create')]")
     public WebElement commentWriteSection;
@@ -112,6 +124,22 @@ public class GalleryItemPage {
 
     public void addToFavorites() {
         addToFavoritesSvg.click();
+    }
+
+    public void showUserMenu() {
+        currentUserName.click();
+    }
+
+    public void gotoPostsPage() {
+        toUserPosts.click();
+    }
+
+    public void gotoFavoritesPage() {
+        toUserFavorites.click();
+    }
+
+    public void chooseAllFavorites() {
+        chooseAllFavorites.click();
     }
 
     // comment voting

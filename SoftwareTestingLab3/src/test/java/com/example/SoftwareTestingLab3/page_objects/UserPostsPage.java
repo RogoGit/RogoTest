@@ -23,12 +23,23 @@ public class UserPostsPage {
     @FindBy(xpath = "//a[text()='all']")
     public WebElement all;
 
+    @FindBy(xpath = "//div[@class='FavoritesPost']//a")
+    public WebElement firstFavoritePost;
+
     public void goToFirstPost() {
         firstPost.click();
     }
 
     public void gotoAll() {
         all.click();
+    }
+
+    public void gotoFirstFavorite() {
+        firstFavoritePost.click();
+    }
+
+    public String getPostHref(WebElement post) {
+        return post.getAttribute("href").split("/")[5];
     }
 
 }
