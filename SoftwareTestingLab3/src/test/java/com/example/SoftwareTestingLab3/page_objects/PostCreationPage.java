@@ -93,8 +93,9 @@ public class PostCreationPage {
         confirmImageDelete.click();
     }
 
-    public void deletePost() {
+    public void deletePost(JavascriptExecutor js) {
         deletePostButton.click();
+        //js.executeScript("arguments[0].click();", deletePostButton);
     }
 
     public void confirmDelete() {

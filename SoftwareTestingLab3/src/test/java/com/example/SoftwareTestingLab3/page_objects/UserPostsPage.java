@@ -45,6 +45,9 @@ public class UserPostsPage {
     @FindBy(xpath = "//a[text()='Delete Folder']")
     public WebElement deleteFolder;
 
+    @FindBy(xpath = "//div[@class='FavoritesPost']//div[@class='Post-item-title']//span")
+    public WebElement postInNewFolder;
+
     public void openFolderSettings() {
         folderSettings.click();
     }

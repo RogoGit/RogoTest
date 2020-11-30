@@ -65,7 +65,7 @@ public class PostCreationTest {
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2500);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -143,15 +143,20 @@ public class PostCreationTest {
         wait.until(ExpectedConditions.visibilityOf(postCreationPage.deleteImage));
         postCreationPage.deleteImage();
         wait.until(ExpectedConditions.visibilityOf(postCreationPage.confirmImageDelete));
-        postCreationPage.confirmImageDelete();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        postCreationPage.confirmImageDelete();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
 
-        postCreationPage.deletePost();
+        postCreationPage.deletePost(js);
         wait.until(ExpectedConditions.visibilityOf(postCreationPage.confirmDelete));
         if (browser.equals(BrowsersList.CHROME)) {
             js.executeScript("arguments[0].scrollIntoView(true);", postCreationPage.confirmDelete);

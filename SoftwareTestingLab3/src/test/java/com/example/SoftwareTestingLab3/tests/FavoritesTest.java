@@ -8,9 +8,12 @@ import com.example.SoftwareTestingLab3.web_helpers.Util;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -81,7 +84,8 @@ public class FavoritesTest {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        Assert.assertTrue("post did not appear in favorites", driver.getPageSource().contains(postTitle));
+        //Assert.assertTrue("post did not appear in favorites", driver.getPageSource().contains(postTitle));
+        Assert.assertEquals(postTitle.trim(), userPostsPage.postInNewFolder.getText().trim());
 
     }
 
@@ -129,7 +133,8 @@ public class FavoritesTest {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        Assert.assertTrue("post did not disappear in favorites", driver.getPageSource().contains(postTitle));
+        //Assert.assertTrue("post did not disappear in favorites", driver.getPageSource().contains(postTitle));
+        Assert.assertNotEquals(postTitle.trim(), userPostsPage.postInNewFolder.getText().trim());
     }
 
     @ParameterizedTest
@@ -197,7 +202,13 @@ public class FavoritesTest {
             ex.printStackTrace();
         }
 
-        Assert.assertFalse(driver.getPageSource().contains(postTitle));
+        //Assert.assertFalse(driver.getPageSource().contains(postTitle));
+        /*Assertions.assertThrows(NoSuchElementException.class, ()->{
+            driver.findElement(By.xpath("//div[@class='FavoritesPost']//span[text()='"+postTitle+"']"));
+        });*/
+
+        Assert.assertNotEquals(postTitle.trim(), userPostsPage.postInNewFolder.getText().trim());
+
         userPostsPage.newFolder.click();
 
         try {
@@ -206,10 +217,21 @@ public class FavoritesTest {
             ex.printStackTrace();
         }
 
-        Assert.assertTrue(driver.getPageSource().contains(postTitle));
+        Assert.assertEquals(postTitle.trim(), userPostsPage.postInNewFolder.getText().trim());
+
         userPostsPage.openFolderSettings();
         wait.until(ExpectedConditions.visibilityOf(userPostsPage.deleteFolder));
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         userPostsPage.deleteFolder();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
 
     }
 
