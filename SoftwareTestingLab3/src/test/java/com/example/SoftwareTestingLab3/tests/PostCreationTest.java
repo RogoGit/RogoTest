@@ -65,7 +65,7 @@ public class PostCreationTest {
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         try {
-            Thread.sleep(2500);
+            Thread.sleep(3000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -75,6 +75,11 @@ public class PostCreationTest {
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         userPostsPage = new UserPostsPage(driver);
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         userPostsPage.gotoAll();
         wait.until(ExpectedConditions.visibilityOf(userPostsPage.firstPost));
         Assert.assertTrue("post did not appear", driver.getPageSource().contains(postTitle));
@@ -126,8 +131,18 @@ public class PostCreationTest {
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         userPostsPage = new UserPostsPage(driver);
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         userPostsPage.gotoAll();
         wait.until(ExpectedConditions.visibilityOf(userPostsPage.firstPost));
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         userPostsPage.goToFirstPost();
 
         // delete post
@@ -161,6 +176,12 @@ public class PostCreationTest {
         if (browser.equals(BrowsersList.CHROME)) {
             js.executeScript("arguments[0].scrollIntoView(true);", postCreationPage.confirmDelete);
         }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         postCreationPage.confirmDelete();
 
         // check
@@ -174,6 +195,11 @@ public class PostCreationTest {
         mainPage.gotoPostsPage();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         userPostsPage = new UserPostsPage(driver);
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         userPostsPage.gotoAll();
         wait.until(ExpectedConditions.visibilityOf(userPostsPage.firstPost));
         Assert.assertFalse("post did not disappear", driver.getPageSource().contains(postTitle));

@@ -21,7 +21,7 @@ public class UserPostsPage {
     @FindBy(xpath = "//div[@class='ProfileMeta-user']")
     public WebElement userNameTitle;
 
-    @FindBy(xpath = "//a[@class='Post-item novote']")
+    @FindBy(xpath = "(//a[@class='Post-item novote'])")
     public WebElement firstPost;
 
     @FindBy(xpath = "//a[text()='all']")
