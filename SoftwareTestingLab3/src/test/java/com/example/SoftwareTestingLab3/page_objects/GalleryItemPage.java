@@ -104,7 +104,7 @@ public class GalleryItemPage {
     @FindBy(xpath = "//div[@class='GalleryComment-replies']")
     public WebElement commentReply;
 
-    @FindBy(xpath = "//a[contains(@href,'/t/mysterious_glitch')]")
+    @FindBy(xpath = "//a[contains(@href,'/t/funny')]")
     public WebElement specialTag;
 
     // post voting

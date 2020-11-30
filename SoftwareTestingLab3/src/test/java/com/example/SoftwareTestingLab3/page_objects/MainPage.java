@@ -14,6 +14,15 @@ public class MainPage {
         this.driver = driver;
     }
 
+    @FindBy(xpath = "//form[contains(@class,'Searchbar')]//input")
+    public WebElement searchInput;
+
+    @FindBy(xpath = "//form[contains(@class,'Searchbar')]//button[@type='submit']")
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//span[@class='Suggestion-item-text']")
+    public WebElement suggestedItem;
+
     @FindBy(xpath = "//a[contains(@class, 'signin')]")
     private WebElement loginButton;
 
@@ -40,6 +49,18 @@ public class MainPage {
 
     @FindBy(xpath = "//a[contains(@href,'upload')]")
     public WebElement newPostButton;
+
+    public void searchFor(String search) {
+        searchInput.sendKeys(search);
+    }
+
+    public void submitSearch() {
+        searchButton.click();
+    }
+
+    public void chooseSuggestedItem() {
+        suggestedItem.click();
+    }
 
     public void goToLoginPage() {
         loginButton.click();
